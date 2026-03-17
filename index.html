@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TotallyJuicy — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-name">TotallyJuicy</div>
+    <div class="nav-links">
+      <button class="nav-btn" data-target="about">About</button>
+      <button class="nav-btn" data-target="cybersecurity">Cybersecurity</button>
+      <button class="nav-btn" data-target="data">Data</button>
+      <button class="nav-btn" data-target="gamedev">Game Dev</button>
+      <button class="nav-btn" data-target="other">Other</button>
+      <button class="nav-btn" data-target="resume">Resume</button>
+      <button class="nav-btn" data-target="contact">Contact</button>
+    </div>
+  </nav>
+
+  <!-- CANVAS -->
+  <div id="viewport">
+    <div id="world">
+
+      <!-- HERO -->
+      <section class="section" id="about" style="left: 2000px; top: 1100px;">
+        <div class="tag">Hello world</div>
+        <h1 class="hero-name">TotallyJuicy</h1>
+        <p class="hero-handle">Taejeong Kim · TJ</p>
+        <p class="hero-sub">Information Science student.<br>Exploring <em>cybersecurity</em>, <em>data</em>,<br>and <em>game creation</em>.</p>
+        <p class="hero-body">Information Science student at the University of Maryland. I build things across cybersecurity, data analysis, and (soon) game dev. Fluent in Korean, studying for CompTIA Security+, and always working on something new.</p>
+        <div class="hero-btns">
+          <button class="pill-btn primary" data-target="cybersecurity">Cybersecurity work →</button>
+          <button class="pill-btn" data-target="data">Data work →</button>
+          <button class="pill-btn" data-target="gamedev">Game dev →</button>
+        </div>
+
+        <div class="about-divider"></div>
+        <div class="tag">Toolkit</div>
+        <div class="skills-group">
+          <div class="skill-label">Languages</div>
+          <div class="skill-pills">
+            <span>Python</span><span>Java</span><span>SQL</span><span>JavaScript</span><span>HTML/CSS</span><span>Bash</span><span>PowerShell</span><span>R</span>
+          </div>
+        </div>
+        <div class="skills-group">
+          <div class="skill-label">Cybersecurity</div>
+          <div class="skill-pills">
+            <span>Splunk</span><span>Wireshark</span><span>Nmap</span><span>Kali Linux</span><span>Metasploit</span><span>Sysmon</span>
+          </div>
+        </div>
+        <div class="skills-group">
+          <div class="skill-label">Data</div>
+          <div class="skill-pills">
+            <span>Pandas</span><span>NumPy</span><span>Scikit-learn</span><span>NetworkX</span><span>BeautifulSoup</span><span>Jupyter</span>
+          </div>
+        </div>
+        <div class="skills-group">
+          <div class="skill-label">Game Dev</div>
+          <div class="skill-pills">
+            <span>Unity</span><span>C#</span><span>Godot</span><span>GDScript</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- CYBERSECURITY -->
+      <section class="section" id="cybersecurity" style="left: 3400px; top: 1000px;">
+        <div class="tag">Track 01</div>
+        <h2 class="section-title">Cybersecurity</h2>
+        <p class="section-body">Interested in threat analysis, network security, and protecting systems from the inside out. Here are some projects and my resume.</p>
+        <div class="card-grid">
+          <div class="project-card">
+            <div class="project-card-body">
+              <div class="card-label">Splunk · ELK · Wazuh</div>
+              <h3>Home Lab SIEM Setup</h3>
+              <p>Configured SIEM tools for centralized log collection and real-time analysis, with dashboards to detect brute-force attempts and port scans.</p>
+            </div>
+            <a href="#" class="card-link">View →</a>
+          </div>
+          <div class="project-card">
+            <div class="project-card-body">
+              <div class="card-label">Python · Networking</div>
+              <h3>Multithreaded TCP Port Scanner</h3>
+              <p>Multithreaded TCP scanner supporting CIDR targets and custom port ranges, with service detection, banner grabbing, and structured JSON output.</p>
+            </div>
+            <a href="#" class="card-link">View →</a>
+          </div>
+          <div class="project-card">
+            <div class="project-card-body">
+              <div class="card-label">Python · Scapy</div>
+              <h3>Network Packet Sniffer</h3>
+              <p>Packet capture tool that classifies live traffic across TCP, UDP, DNS, ICMP, and IP protocols with BPF filtering for targeted inspection.</p>
+            </div>
+            <a href="#" class="card-link">View →</a>
+          </div>
+          <div class="project-card">
+            <div class="project-card-body">
+              <div class="card-label">Python · SIEM Concepts</div>
+              <h3>Automated Log Threat Detection</h3>
+              <p>Log analysis tool that parses system and auth logs to detect brute-force attempts, failed logins, and privilege escalation indicators.</p>
+            </div>
+            <a href="#" class="card-link">View →</a>
+          </div>
+        </div>
+        <a href="Cyber_Resume.pdf" download class="resume-btn">Download Cybersecurity Resume ↓</a>
+      </section>
+
+      <!-- DATA -->
+      <section class="section" id="data" style="left: 400px; top: 900px;">
+        <div class="tag">Track 02</div>
+        <h2 class="section-title">Data Analysis</h2>
+        <p class="section-body">I like finding patterns in messy data and turning them into something that actually makes sense. Python, SQL, and a lot of curiosity.</p>
+        <div class="card-grid">
+          <div class="project-card">
+            <div class="project-card-body">
+              <div class="card-label">Python · Pandas</div>
+              <h3>Pokémon Showdown Meta Analysis</h3>
+              <p>Parsed Smogon usage stats into Pandas DataFrames to rank top competitive Pokémon and identify meta-dominant trends. Published on Medium.</p>
+            </div>
+            <a href="#" class="card-link">View →</a>
+          </div>
+          <div class="project-card">
+            <div class="project-card-body">
+              <div class="card-label">SQL · MySQL</div>
+              <h3>Letterboxd Heavy vs. Casual Rater Analysis</h3>
+              <p>Analyzed 10.4M movie ratings to compare behavioral differences between heavy and casual users — rating harshness, consensus deviation, and variance.</p>
+            </div>
+            <a href="#" class="card-link">View →</a>
+          </div>
+          <div class="project-card">
+            <div class="project-card-body">
+              <div class="card-label">Python · NetworkX · Gephi</div>
+              <h3>Wikipedia Knowledge Graph</h3>
+              <p>Crawled 1,400 Wikipedia pages via BFS to build a NetworkX graph of 2,400 edges, visualized in Gephi to reveal clusters across AI, politics, and academia.</p>
+            </div>
+            <a href="#" class="card-link">View →</a>
+          </div>
+          <div class="project-card">
+            <div class="project-card-body">
+              <div class="card-label">Python · Scikit-learn · NLP</div>
+              <h3>Steam Review Sentiment Classifier</h3>
+              <p>Binary sentiment classifier on 50K Steam reviews using TF-IDF and Naive Bayes/KNN/Decision Tree models — achieved ~86% accuracy and 0.89 AUC.</p>
+            </div>
+            <a href="#" class="card-link">View →</a>
+          </div>
+        </div>
+        <a href="Data_Science_Resume.pdf" download class="resume-btn">Download Data Resume ↓</a>
+      </section>
+
+      <!-- GAME DEV -->
+      <section class="section" id="gamedev" style="left: 3300px; top: 200px;">
+        <div class="tag">Track 03</div>
+        <h2 class="section-title">Game Dev</h2>
+        <p class="section-body">Just getting started, but deeply interested in building worlds and experiences. Exploring game design, mechanics, and storytelling through play.</p>
+        <div class="card-grid">
+          <div class="project-card">
+            <div class="project-card-body">
+              <div class="card-label">WIP · Unity · C#</div>
+              <h3>Colorblind</h3>
+              <p>An aesthetic narrative game built in Unity, inspired by Undertale. Currently in development.</p>
+            </div>
+            <a href="#" class="card-link">WIP</a>
+          </div>
+          <div class="project-card">
+            <div class="project-card-body">
+              <div class="card-label">Unity · C#</div>
+              <h3>My-project</h3>
+              <p>A Unity game built with a friend. Early stage C# project.</p>
+            </div>
+            <a href="https://github.com/TotallyJuicy/My-project" target="_blank" class="card-link">View →</a>
+          </div>
+          <div class="project-card coming-soon">
+            <div class="project-card-body">
+              <div class="card-label">Coming soon</div>
+              <h3>More on the way</h3>
+              <p>This section is growing. Check back soon.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section class="section contact-section" id="contact" style="left: 300px; top: 2200px;">
+        <div class="tag">Say hi</div>
+        <h2 class="section-title">Let's Connect</h2>
+        <p class="section-body">Whether it's a job, a collab, or just a cool project — I'm always down to talk.</p>
+        <div class="contact-links">
+          <a href="mailto:tj11564@gmail.com" class="contact-item">
+            <span class="contact-icon">✉</span>
+            <span>tj11564@gmail.com</span>
+          </a>
+          <a href="https://linkedin.com/in/taejeong-kim03" target="_blank" class="contact-item">
+            <span class="contact-icon">in</span>
+            <span>LinkedIn</span>
+          </a>
+          <a href="https://github.com/TotallyJuicy" target="_blank" class="contact-item">
+            <span class="contact-icon">gh</span>
+            <span>GitHub — TotallyJuicy</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- RESUME -->
+      <section class="section resume-section" id="resume" style="left: 1900px; top: 2300px;">
+        <div class="tag">Resume</div>
+        <h2 class="section-title">Resumes</h2>
+        <p class="section-body">Two tracks, two resumes. Download whichever fits the role — or both.</p>
+        <div class="resume-cards">
+
+          <div class="resume-card">
+            <div class="resume-preview">
+              <iframe src="Cyber_Resume.pdf" title="Cybersecurity Resume"></iframe>
+              <div class="resume-preview-fallback">
+                <span>&#128196;</span>
+                <p>Cybersecurity Resume</p>
+                <small>Upload your PDF to see a preview</small>
+              </div>
+            </div>
+            <div class="resume-card-footer">
+              <span class="card-label">Cybersecurity</span>
+              <a href="Cyber_Resume.pdf" download class="resume-btn">Download &#8595;</a>
+            </div>
+          </div>
+
+          <div class="resume-card">
+            <div class="resume-preview">
+              <iframe src="Data_Science_Resume.pdf" title="Data Resume"></iframe>
+              <div class="resume-preview-fallback">
+                <span>&#128196;</span>
+                <p>Data Analysis Resume</p>
+                <small>Upload your PDF to see a preview</small>
+              </div>
+            </div>
+            <div class="resume-card-footer">
+              <span class="card-label">Data Analysis</span>
+              <a href="Data_Science_Resume.pdf" download class="resume-btn">Download &#8595;</a>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- OTHER -->
+      <section class="section" id="other" style="left: 500px; top: 3100px;">
+        <div class="tag">Other</div>
+        <h2 class="section-title">Other Projects</h2>
+        <p class="section-body">Things that don't fit neatly into one category — websites, tools, experiments, and collabs.</p>
+        <div class="card-grid">
+          <div class="project-card">
+            <div class="project-card-body">
+              <div class="card-label">Web · Decision Tree</div>
+              <h3>OddlySpecificAskCrush</h3>
+              <p>An interactive decision tree that helps you figure out whether to tell your crush you like them. Built with vanilla HTML, CSS, and JS.</p>
+            </div>
+            <a href="https://oddlyspecific-askout.netlify.app" target="_blank" class="card-link">View →</a>
+          </div>
+          <div class="project-card">
+            <div class="project-card-body">
+              <div class="card-label">Game · Unity · C#</div>
+              <h3>Cool Pool</h3>
+              <p>A pool game built in Unity with a friend. Add description here once you send the link!</p>
+            </div>
+            <a href="https://github.com/guanglinwei/coolpool" target="_blank" class="card-link">View →</a>
+          </div>
+          <div class="project-card coming-soon">
+            <div class="project-card-body">
+              <div class="card-label">Coming soon</div>
+              <h3>More on the way</h3>
+              <p>This section is growing. Check back soon.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- DECORATIVE CONNECTOR LINES -->
+      <svg class="deco-lines" viewBox="0 0 5000 4200" xmlns="http://www.w3.org/2000/svg">
+        <!-- about -> cybersecurity (right) -->
+        <path d="M 2480 1440 C 2800 1350 3100 1250 3400 1240" stroke="#BABE75" stroke-width="1.5" fill="none" opacity="0.35" stroke-dasharray="6 4"/>
+        <!-- about -> data (left) -->
+        <path d="M 2000 1350 C 1600 1250 1200 1100 880 1100" stroke="#BABE75" stroke-width="1.5" fill="none" opacity="0.35" stroke-dasharray="6 4"/>
+        <!-- about -> gamedev (top right) -->
+        <path d="M 2350 1100 C 2700 800 3000 500 3300 480" stroke="#BEC5A4" stroke-width="1.5" fill="none" opacity="0.3" stroke-dasharray="6 4"/>
+        <!-- about -> resume (below) -->
+        <path d="M 2240 1780 C 2200 1950 2100 2100 2250 2300" stroke="#BEC5A4" stroke-width="1.5" fill="none" opacity="0.3" stroke-dasharray="6 4"/>
+        <!-- about -> contact (bottom left) -->
+        <path d="M 2000 1780 C 1600 1900 1100 2050 720 2300" stroke="#BABE75" stroke-width="1.5" fill="none" opacity="0.25" stroke-dasharray="6 4"/>
+        <!-- contact -> other (below) -->
+        <path d="M 500 2560 C 500 2700 500 2900 500 3100" stroke="#BEC5A4" stroke-width="1.5" fill="none" opacity="0.25" stroke-dasharray="6 4"/>
+      </svg>
+
+    </div>
+  </div>
+
+  <!-- BOTTOM HUD -->
+  <div class="bottom-hud">
+    <span class="hud-hint">Click a section above to navigate · Drag to explore</span>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
