@@ -32,8 +32,9 @@ function panTo(id, instant = false) {
   const elW    = el.offsetWidth;
   const elH    = el.offsetHeight;
 
-  const targetX = elLeft - (vw / 2) + (elW / 2);
-  const targetY = elTop  - (vh / 2) + (elH / 2);
+  // Center the section in viewport, accounting for scale
+  const targetX = elLeft * scale - vw / 2 + (elW * scale) / 2;
+  const targetY = elTop  * scale - vh / 2 + (elH * scale) / 2;
 
   if (instant) {
     requestAnimationFrame(() => {
@@ -151,25 +152,9 @@ const MAX_SCALE = 1.6;
 
 viewport.addEventListener('wheel', e => {
   e.preventDefault();
-  const delta = e.deltaY > 0 ? -0.08 : 0.08;
-  const newScale = Math.min(MAX_SCALE, Math.max(MIN_SCALE, scale + delta));
-
-  const pos = getTranslate();
-
-  // Mouse position relative to viewport
-  const rect = viewport.getBoundingClientRect();
-  const mouseX = e.clientX - rect.left;
-  const mouseY = e.clientY - rect.top;
-
-  // Adjust translation so zoom centers on mouse
-  const scaleRatio = newScale / scale;
-  const newX = mouseX - scaleRatio * (mouseX - pos.x);
-  const newY = mouseY - scaleRatio * (mouseY - pos.y);
-
-  scale = newScale;
-  world.style.transition = 'none';
-  world.style.transformOrigin = '0 0';
-  world.style.transform = `translate(${newX}px, ${newY}px) scale(${scale})`;
+  const zoomFactor = e.deltaY > 0 ? 0.92 : 1.08;
+  scale = Math.min(MAX_SCALE, Math.max(MIN_SCALE, scale * zoomFactor));
+  panTo(currentSection, true);
 }, { passive: false });
 
 // --- INIT ---
