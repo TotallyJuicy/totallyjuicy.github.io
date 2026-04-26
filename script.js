@@ -38,14 +38,16 @@ function panTo(id, instant = false) {
   if (instant) {
     world.style.transition = 'none';
     requestAnimationFrame(() => {
-      world.style.transform = `translate(${-targetX}px, ${-targetY}px)`;
+      world.style.transformOrigin = '0 0';
+      world.style.transform = `translate(${-targetX}px, ${-targetY}px) scale(${scale})`;
       requestAnimationFrame(() => {
         world.style.transition = 'transform 850ms cubic-bezier(0.22, 1, 0.36, 1)';
       });
     });
   } else {
     world.style.transition = 'transform 850ms cubic-bezier(0.22, 1, 0.36, 1)';
-    world.style.transform = `translate(${-targetX}px, ${-targetY}px)`;
+    world.style.transformOrigin = '0 0';
+    world.style.transform = `translate(${-targetX}px, ${-targetY}px) scale(${scale})`;
   }
 
   // Update active states
@@ -145,17 +147,27 @@ let scale = 1;
 const MIN_SCALE = 0.4;
 const MAX_SCALE = 1.6;
 
-function applyZoom() {
-  world.style.transformOrigin = '0 0';
-  const pos = getTranslate();
-  world.style.transform = `translate(${pos.x}px, ${pos.y}px) scale(${scale})`;
-}
-
 viewport.addEventListener('wheel', e => {
   e.preventDefault();
   const delta = e.deltaY > 0 ? -0.08 : 0.08;
-  scale = Math.min(MAX_SCALE, Math.max(MIN_SCALE, scale + delta));
-  applyZoom();
+  const newScale = Math.min(MAX_SCALE, Math.max(MIN_SCALE, scale + delta));
+
+  const pos = getTranslate();
+
+  // Mouse position relative to viewport
+  const rect = viewport.getBoundingClientRect();
+  const mouseX = e.clientX - rect.left;
+  const mouseY = e.clientY - rect.top;
+
+  // Adjust translation so zoom centers on mouse
+  const scaleRatio = newScale / scale;
+  const newX = mouseX - scaleRatio * (mouseX - pos.x);
+  const newY = mouseY - scaleRatio * (mouseY - pos.y);
+
+  scale = newScale;
+  world.style.transition = 'none';
+  world.style.transformOrigin = '0 0';
+  world.style.transform = `translate(${newX}px, ${newY}px) scale(${scale})`;
 }, { passive: false });
 
 // --- INIT ---
