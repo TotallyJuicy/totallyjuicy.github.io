@@ -1,2 +1,1 @@
-https://totallyjuicy.github.io/TotallyJuicySite/
-
+https://totallyjuicy.github.io/
