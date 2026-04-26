@@ -36,18 +36,14 @@ function panTo(id, instant = false) {
   const targetY = elTop  - (vh / 2) + (elH / 2);
 
   if (instant) {
-    world.style.transition = 'none';
     requestAnimationFrame(() => {
-      world.style.transformOrigin = '0 0';
-      world.style.transform = `translate(${-targetX}px, ${-targetY}px) scale(${scale})`;
+      setTransform(-targetX, -targetY, scale);
       requestAnimationFrame(() => {
         world.style.transition = 'transform 850ms cubic-bezier(0.22, 1, 0.36, 1)';
       });
     });
   } else {
-    world.style.transition = 'transform 850ms cubic-bezier(0.22, 1, 0.36, 1)';
-    world.style.transformOrigin = '0 0';
-    world.style.transform = `translate(${-targetX}px, ${-targetY}px) scale(${scale})`;
+    setTransform(-targetX, -targetY, scale, 'transform 850ms cubic-bezier(0.22, 1, 0.36, 1)');
   }
 
   // Update active states
@@ -76,18 +72,24 @@ document.querySelectorAll('[data-target]').forEach(btn => {
 let isDragging = false;
 let dragStart = { x: 0, y: 0 };
 let worldPos  = { x: 0, y: 0 };
+let tx = 0, ty = 0; // track translation separately
 
 function getTranslate() {
-  const style = window.getComputedStyle(world);
-  const matrix = new DOMMatrix(style.transform);
-  return { x: matrix.m41, y: matrix.m42 };
+  return { x: tx, y: ty };
+}
+
+function setTransform(x, y, s, transition = 'none') {
+  tx = x; ty = y;
+  world.style.transition = transition;
+  world.style.transformOrigin = '0 0';
+  world.style.transform = `translate(${x}px, ${y}px) scale(${s})`;
 }
 
 viewport.addEventListener('mousedown', e => {
   if (e.target.closest('button, a')) return;
   isDragging = true;
   dragStart = { x: e.clientX, y: e.clientY };
-  worldPos = getTranslate();
+  worldPos = { x: tx, y: ty };
   document.body.classList.add('dragging');
   world.style.transition = 'none';
 });
@@ -96,7 +98,7 @@ window.addEventListener('mousemove', e => {
   if (!isDragging) return;
   const dx = e.clientX - dragStart.x;
   const dy = e.clientY - dragStart.y;
-  world.style.transform = `translate(${worldPos.x + dx}px, ${worldPos.y + dy}px)`;
+  setTransform(worldPos.x + dx, worldPos.y + dy, scale);
 });
 
 window.addEventListener('mouseup', () => {
@@ -112,7 +114,7 @@ viewport.addEventListener('touchstart', e => {
   const t = e.touches[0];
   isDragging = true;
   dragStart = { x: t.clientX, y: t.clientY };
-  worldPos = getTranslate();
+  worldPos = { x: tx, y: ty };
   world.style.transition = 'none';
 }, { passive: true });
 
@@ -121,7 +123,7 @@ window.addEventListener('touchmove', e => {
   const t = e.touches[0];
   const dx = t.clientX - dragStart.x;
   const dy = t.clientY - dragStart.y;
-  world.style.transform = `translate(${worldPos.x + dx}px, ${worldPos.y + dy}px)`;
+  setTransform(worldPos.x + dx, worldPos.y + dy, scale);
 }, { passive: true });
 
 window.addEventListener('touchend', () => {
