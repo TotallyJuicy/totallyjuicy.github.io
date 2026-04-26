@@ -1,59 +1,52 @@
 const world = document.getElementById('world');
 const viewport = document.getElementById('viewport');
 
-// Section positions (center on these)
-const sections = {
-  about:          { el: null },
-  cybersecurity:  { el: null },
-  data:           { el: null },
-  gamedev:        { el: null },
-  skills:         { el: null },
-  other:          { el: null },
-  resume:         { el: null },
-  contact:        { el: null },
-  easteregg:      { el: null },
-};
+// --- STATE ---
+let tx = 0, ty = 0, scale = 1;
+let currentSection = 'about';
+const MIN_SCALE = 0.4;
+const MAX_SCALE = 1.6;
 
-// Populate refs
+// Section elements
+const sections = {
+  about: null, cybersecurity: null, data: null, gamedev: null,
+  skills: null, other: null, resume: null, contact: null, easteregg: null,
+};
 Object.keys(sections).forEach(id => {
-  sections[id].el = document.getElementById(id);
+  sections[id] = document.getElementById(id);
 });
 
+// --- TRANSFORM ---
+function applyTransform(x, y, s, animated = false) {
+  tx = x; ty = y; scale = s;
+  world.style.transition = animated ? 'transform 850ms cubic-bezier(0.22, 1, 0.36, 1)' : 'none';
+  world.style.transformOrigin = '0 0';
+  world.style.transform = `translate(${x}px, ${y}px) scale(${s})`;
+}
+
 // --- PAN TO SECTION ---
-function panTo(id, instant = false) {
-  const el = sections[id]?.el;
+function panTo(id, animated = true) {
+  const el = sections[id];
   if (!el) return;
 
   const vw = viewport.clientWidth;
   const vh = viewport.clientHeight;
-
   const elLeft = parseInt(el.style.left);
   const elTop  = parseInt(el.style.top);
   const elW    = el.offsetWidth;
   const elH    = el.offsetHeight;
 
-  // Center the section in viewport, accounting for scale
-  const targetX = elLeft * scale - vw / 2 + (elW * scale) / 2;
-  const targetY = elTop  * scale - vh / 2 + (elH * scale) / 2;
+  const newTx = vw / 2 - elLeft * scale - (elW * scale) / 2;
+  const newTy = vh / 2 - elTop  * scale - (elH * scale) / 2;
 
-  if (instant) {
-    requestAnimationFrame(() => {
-      setTransform(-targetX, -targetY, scale);
-      requestAnimationFrame(() => {
-        world.style.transition = 'transform 850ms cubic-bezier(0.22, 1, 0.36, 1)';
-      });
-    });
-  } else {
-    setTransform(-targetX, -targetY, scale, 'transform 850ms cubic-bezier(0.22, 1, 0.36, 1)');
-  }
+  applyTransform(newTx, newTy, scale, animated);
 
-  // Update active states
   document.querySelectorAll('.section').forEach(s => {
-    s.classList.remove('active');
     s.classList.add('dim');
+    s.classList.remove('active');
   });
-  el.classList.add('active');
   el.classList.remove('dim');
+  el.classList.add('active');
 
   document.querySelectorAll('.nav-btn').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.target === id);
@@ -62,51 +55,32 @@ function panTo(id, instant = false) {
   currentSection = id;
 }
 
-let currentSection = 'about';
-
 // --- NAV BUTTONS ---
 document.querySelectorAll('[data-target]').forEach(btn => {
-  btn.addEventListener('click', () => panTo(btn.dataset.target));
+  btn.addEventListener('click', () => panTo(btn.dataset.target, true));
 });
 
-// --- DRAG TO PAN ---
+// --- DRAG ---
 let isDragging = false;
 let dragStart = { x: 0, y: 0 };
-let worldPos  = { x: 0, y: 0 };
-let tx = 0, ty = 0; // track translation separately
-
-function getTranslate() {
-  return { x: tx, y: ty };
-}
-
-function setTransform(x, y, s, transition = 'none') {
-  tx = x; ty = y;
-  world.style.transition = transition;
-  world.style.transformOrigin = '0 0';
-  world.style.transform = `translate(${x}px, ${y}px) scale(${s})`;
-}
+let dragOrigin = { x: 0, y: 0 };
 
 viewport.addEventListener('mousedown', e => {
   if (e.target.closest('button, a')) return;
   isDragging = true;
   dragStart = { x: e.clientX, y: e.clientY };
-  worldPos = { x: tx, y: ty };
+  dragOrigin = { x: tx, y: ty };
   document.body.classList.add('dragging');
-  world.style.transition = 'none';
 });
 
 window.addEventListener('mousemove', e => {
   if (!isDragging) return;
-  const dx = e.clientX - dragStart.x;
-  const dy = e.clientY - dragStart.y;
-  setTransform(worldPos.x + dx, worldPos.y + dy, scale);
+  applyTransform(dragOrigin.x + e.clientX - dragStart.x, dragOrigin.y + e.clientY - dragStart.y, scale);
 });
 
 window.addEventListener('mouseup', () => {
-  if (!isDragging) return;
   isDragging = false;
   document.body.classList.remove('dragging');
-  world.style.transition = 'transform 850ms cubic-bezier(0.22, 1, 0.36, 1)';
 });
 
 // Touch drag
@@ -115,49 +89,36 @@ viewport.addEventListener('touchstart', e => {
   const t = e.touches[0];
   isDragging = true;
   dragStart = { x: t.clientX, y: t.clientY };
-  worldPos = { x: tx, y: ty };
-  world.style.transition = 'none';
+  dragOrigin = { x: tx, y: ty };
 }, { passive: true });
 
 window.addEventListener('touchmove', e => {
   if (!isDragging) return;
   const t = e.touches[0];
-  const dx = t.clientX - dragStart.x;
-  const dy = t.clientY - dragStart.y;
-  setTransform(worldPos.x + dx, worldPos.y + dy, scale);
+  applyTransform(dragOrigin.x + t.clientX - dragStart.x, dragOrigin.y + t.clientY - dragStart.y, scale);
 }, { passive: true });
 
-window.addEventListener('touchend', () => {
-  isDragging = false;
-  world.style.transition = 'transform 850ms cubic-bezier(0.22, 1, 0.36, 1)';
-});
+window.addEventListener('touchend', () => { isDragging = false; });
 
-// Re-center on resize
-window.addEventListener('resize', () => panTo(currentSection, true));
+// --- ZOOM (centered on current section) ---
+viewport.addEventListener('wheel', e => {
+  e.preventDefault();
+  const newScale = Math.min(MAX_SCALE, Math.max(MIN_SCALE, scale * (e.deltaY > 0 ? 0.92 : 1.08)));
+  scale = newScale;
+  panTo(currentSection, false);
+}, { passive: false });
 
-// --- CLICK DIMMED SECTION TO NAVIGATE ---
+// --- CLICK DIMMED SECTION ---
 document.querySelectorAll('.section').forEach(s => {
   s.addEventListener('click', e => {
     if (e.target.closest('button, a')) return;
-    if (!s.classList.contains('active')) {
-      panTo(s.id);
-    }
+    if (!s.classList.contains('active')) panTo(s.id, true);
   });
 });
 
-// --- ZOOM ---
-let scale = 1;
-const MIN_SCALE = 0.4;
-const MAX_SCALE = 1.6;
-
-viewport.addEventListener('wheel', e => {
-  e.preventDefault();
-  const zoomFactor = e.deltaY > 0 ? 0.92 : 1.08;
-  scale = Math.min(MAX_SCALE, Math.max(MIN_SCALE, scale * zoomFactor));
-  panTo(currentSection, true);
-}, { passive: false });
+// --- RESIZE ---
+window.addEventListener('resize', () => panTo(currentSection, false));
 
 // --- INIT ---
-// Start all sections dimmed except about
 document.querySelectorAll('.section').forEach(s => s.classList.add('dim'));
-panTo('about', true);
+panTo('about', false);
