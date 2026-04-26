@@ -6,6 +6,7 @@
   <title>TotallyJuicy — Portfolio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -15,8 +16,8 @@
     <div class="nav-name">TotallyJuicy</div>
     <div class="nav-links">
       <button class="nav-btn" data-target="about">About</button>
-      <button class="nav-btn" data-target="cybersecurity">Cybersecurity</button>
       <button class="nav-btn" data-target="data">Data</button>
+      <button class="nav-btn" data-target="cybersecurity">Cybersecurity</button>
       <button class="nav-btn" data-target="gamedev">Game Dev</button>
       <button class="nav-btn" data-target="other">Other</button>
       <button class="nav-btn" data-target="resume">Resume</button>
@@ -36,9 +37,9 @@
         <p class="hero-sub">Information Science student.<br>Exploring <em>cybersecurity</em>, <em>data</em>,<br>and <em>game creation</em>.</p>
         <p class="hero-body">Information Science student at the University of Maryland. I build things across cybersecurity, data analysis, and (soon) game dev. Fluent in Korean, studying for CompTIA Security+, and always working on something new.</p>
         <div class="hero-btns">
-          <button class="pill-btn primary" data-target="cybersecurity">Cybersecurity work →</button>
-          <button class="pill-btn" data-target="data">Data work →</button>
-          <button class="pill-btn" data-target="gamedev">Game dev →</button>
+          <button class="pill-btn" data-target="cybersecurity">Cybersecurity →</button>
+          <button class="pill-btn primary" data-target="data">Data Analyst →</button>
+          <button class="pill-btn" data-target="gamedev">Game Dev →</button>
         </div>
 
         <div class="about-divider"></div>
@@ -50,15 +51,15 @@
           </div>
         </div>
         <div class="skills-group">
-          <div class="skill-label">Cybersecurity</div>
-          <div class="skill-pills">
-            <span>Splunk</span><span>Wireshark</span><span>Nmap</span><span>Kali Linux</span><span>Metasploit</span><span>Sysmon</span>
-          </div>
-        </div>
-        <div class="skills-group">
           <div class="skill-label">Data</div>
           <div class="skill-pills">
             <span>Pandas</span><span>NumPy</span><span>Scikit-learn</span><span>NetworkX</span><span>BeautifulSoup</span><span>Jupyter</span>
+          </div>
+        </div>
+        <div class="skills-group">
+          <div class="skill-label">Cybersecurity</div>
+          <div class="skill-pills">
+            <span>Splunk</span><span>Wireshark</span><span>Nmap</span><span>Kali Linux</span><span>Metasploit</span><span>Sysmon</span>
           </div>
         </div>
         <div class="skills-group">
@@ -108,7 +109,7 @@
             <a href="#" class="card-link">View →</a>
           </div>
         </div>
-        <a href="Cyber_Resume.pdf" download class="resume-btn">Download Cybersecurity Resume ↓</a>
+
       </section>
 
       <!-- DATA -->
@@ -131,7 +132,7 @@
               <h3>Letterboxd Heavy vs. Casual Rater Analysis</h3>
               <p>Analyzed 10.4M movie ratings to compare behavioral differences between heavy and casual users — rating harshness, consensus deviation, and variance.</p>
             </div>
-            <a href="#" class="card-link">View →</a>
+            <a href="https://github.com/TotallyJuicy/Letterboxd-EDA" target="_blank" class="card-link">View →</a>
           </div>
           <div class="project-card">
             <div class="project-card-body">
@@ -150,7 +151,7 @@
             <a href="#" class="card-link">View →</a>
           </div>
         </div>
-        <a href="Data_Science_Resume.pdf" download class="resume-btn">Download Data Resume ↓</a>
+
       </section>
 
       <!-- GAME DEV -->
@@ -170,10 +171,18 @@
           <div class="project-card">
             <div class="project-card-body">
               <div class="card-label">Unity · C#</div>
-              <h3>My-project</h3>
-              <p>A Unity game built with a friend. Early stage C# project.</p>
+              <h3>Color Timing Game</h3>
+              <p>A color-based timing pixel game built in Unity.</p>
             </div>
-            <a href="https://github.com/TotallyJuicy/My-project" target="_blank" class="card-link">View →</a>
+            <a href="#" class="card-link">WIP</a>
+          </div>
+          <div class="project-card">
+            <div class="project-card-body">
+              <div class="card-label">Unity · C#</div>
+              <h3>Cool Pool</h3>
+              <p>A pool game built in Unity with a friend.</p>
+            </div>
+            <a href="https://github.com/guanglinwei/coolpool" target="_blank" class="card-link">View →</a>
           </div>
           <div class="project-card coming-soon">
             <div class="project-card-body">
@@ -182,10 +191,6 @@
               <p>This section is growing. Check back soon.</p>
             </div>
           </div>
-        </div>
-      </section>
-
-      <!-- CONTACT -->
       <section class="section contact-section" id="contact" style="left: 300px; top: 2200px;">
         <div class="tag">Say hi</div>
         <h2 class="section-title">Let's Connect</h2>
@@ -196,11 +201,11 @@
             <span>tj11564@gmail.com</span>
           </a>
           <a href="https://linkedin.com/in/taejeong-kim03" target="_blank" class="contact-item">
-            <span class="contact-icon">in</span>
+            <span class="contact-icon"><i class="fa-brands fa-linkedin"></i></span>
             <span>LinkedIn</span>
           </a>
           <a href="https://github.com/TotallyJuicy" target="_blank" class="contact-item">
-            <span class="contact-icon">gh</span>
+            <span class="contact-icon"><i class="fa-brands fa-github"></i></span>
             <span>GitHub — TotallyJuicy</span>
           </a>
         </div>
@@ -259,14 +264,6 @@
               <p>An interactive decision tree that helps you figure out whether to tell your crush you like them. Built with vanilla HTML, CSS, and JS.</p>
             </div>
             <a href="https://oddlyspecific-askout.netlify.app" target="_blank" class="card-link">View →</a>
-          </div>
-          <div class="project-card">
-            <div class="project-card-body">
-              <div class="card-label">Game · Unity · C#</div>
-              <h3>Cool Pool</h3>
-              <p>A pool game built in Unity with a friend. Add description here once you send the link!</p>
-            </div>
-            <a href="https://github.com/guanglinwei/coolpool" target="_blank" class="card-link">View →</a>
           </div>
           <div class="project-card coming-soon">
             <div class="project-card-body">
