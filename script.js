@@ -100,12 +100,23 @@ window.addEventListener('touchmove', e => {
 
 window.addEventListener('touchend', () => { isDragging = false; });
 
-// --- ZOOM (centered on current section) ---
+// --- ZOOM (centered on viewport center) ---
 viewport.addEventListener('wheel', e => {
   e.preventDefault();
   const newScale = Math.min(MAX_SCALE, Math.max(MIN_SCALE, scale * (e.deltaY > 0 ? 0.92 : 1.08)));
+
+  const vw = viewport.clientWidth;
+  const vh = viewport.clientHeight;
+
+  // Keep viewport center pinned during zoom
+  const worldCenterX = (vw / 2 - tx) / scale;
+  const worldCenterY = (vh / 2 - ty) / scale;
+
+  const newTx = vw / 2 - worldCenterX * newScale;
+  const newTy = vh / 2 - worldCenterY * newScale;
+
   scale = newScale;
-  panTo(currentSection, false);
+  applyTransform(newTx, newTy, scale, false);
 }, { passive: false });
 
 // --- CLICK DIMMED SECTION ---
