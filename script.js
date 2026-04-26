@@ -140,6 +140,24 @@ document.querySelectorAll('.section').forEach(s => {
   });
 });
 
+// --- ZOOM ---
+let scale = 1;
+const MIN_SCALE = 0.4;
+const MAX_SCALE = 1.6;
+
+function applyZoom() {
+  world.style.transformOrigin = '0 0';
+  const pos = getTranslate();
+  world.style.transform = `translate(${pos.x}px, ${pos.y}px) scale(${scale})`;
+}
+
+viewport.addEventListener('wheel', e => {
+  e.preventDefault();
+  const delta = e.deltaY > 0 ? -0.08 : 0.08;
+  scale = Math.min(MAX_SCALE, Math.max(MIN_SCALE, scale + delta));
+  applyZoom();
+}, { passive: false });
+
 // --- INIT ---
 // Start all sections dimmed except about
 document.querySelectorAll('.section').forEach(s => s.classList.add('dim'));
