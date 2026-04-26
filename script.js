@@ -11,6 +11,7 @@ const sections = {
   other:          { el: null },
   resume:         { el: null },
   contact:        { el: null },
+  easteregg:      { el: null },
 };
 
 // Populate refs
@@ -128,6 +129,16 @@ window.addEventListener('touchend', () => {
 
 // Re-center on resize
 window.addEventListener('resize', () => panTo(currentSection, true));
+
+// --- CLICK DIMMED SECTION TO NAVIGATE ---
+document.querySelectorAll('.section').forEach(s => {
+  s.addEventListener('click', e => {
+    if (e.target.closest('button, a')) return;
+    if (!s.classList.contains('active')) {
+      panTo(s.id);
+    }
+  });
+});
 
 // --- INIT ---
 // Start all sections dimmed except about
