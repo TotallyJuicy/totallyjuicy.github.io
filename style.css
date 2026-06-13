@@ -428,9 +428,6 @@ body::after {
   letter-spacing: 0.04em;
 }
 
-/* DRAG CURSOR */
-body.dragging { cursor: grabbing; }
-
 @media (max-width: 768px) {
   .nav-links { gap: 4px; }
   .nav-btn { font-size: 0.7rem; padding: 6px 10px; }

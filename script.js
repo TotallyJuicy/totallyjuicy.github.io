@@ -60,30 +60,90 @@ document.querySelectorAll('[data-target]').forEach(btn => {
   btn.addEventListener('click', () => panTo(btn.dataset.target, true));
 });
 
-// --- DRAG ---
+// --- EDGE PAN ---
+const EDGE_PAN_ZONE = 72;
+const MAX_EDGE_PAN_SPEED = 18;
+let pointer = { x: 0, y: 0 };
+let edgePanFrame = null;
+let isPointerInViewport = false;
+
+function getEdgePanVelocity() {
+  const vw = viewport.clientWidth;
+  const vh = viewport.clientHeight;
+  let directionX = 0;
+  let directionY = 0;
+
+  if (pointer.x < EDGE_PAN_ZONE) {
+    directionX = (EDGE_PAN_ZONE - pointer.x) / EDGE_PAN_ZONE;
+  } else if (pointer.x > vw - EDGE_PAN_ZONE) {
+    directionX = -(pointer.x - (vw - EDGE_PAN_ZONE)) / EDGE_PAN_ZONE;
+  }
+
+  if (pointer.y < EDGE_PAN_ZONE) {
+    directionY = (EDGE_PAN_ZONE - pointer.y) / EDGE_PAN_ZONE;
+  } else if (pointer.y > vh - EDGE_PAN_ZONE) {
+    directionY = -(pointer.y - (vh - EDGE_PAN_ZONE)) / EDGE_PAN_ZONE;
+  }
+
+  const length = Math.hypot(directionX, directionY);
+  if (length === 0) {
+    return { x: 0, y: 0 };
+  }
+
+  const intensity = Math.max(Math.abs(directionX), Math.abs(directionY));
+  const speed = intensity * intensity * MAX_EDGE_PAN_SPEED;
+
+  return {
+    x: (directionX / length) * speed,
+    y: (directionY / length) * speed,
+  };
+}
+
+function edgePanTick() {
+  if (!isPointerInViewport) {
+    edgePanFrame = null;
+    return;
+  }
+
+  const velocity = getEdgePanVelocity();
+  if (velocity.x === 0 && velocity.y === 0) {
+    edgePanFrame = null;
+    return;
+  }
+
+  applyTransform(tx + velocity.x, ty + velocity.y, scale);
+  edgePanFrame = requestAnimationFrame(edgePanTick);
+}
+
+function startEdgePan() {
+  if (edgePanFrame === null) {
+    edgePanFrame = requestAnimationFrame(edgePanTick);
+  }
+}
+
+viewport.addEventListener('mousemove', e => {
+  if (e.target.closest('button, a')) {
+    isPointerInViewport = false;
+    return;
+  }
+  pointer = { x: e.clientX, y: e.clientY };
+  isPointerInViewport = true;
+  startEdgePan();
+});
+
+viewport.addEventListener('mouseleave', () => {
+  isPointerInViewport = false;
+});
+
+window.addEventListener('blur', () => {
+  isPointerInViewport = false;
+});
+
+// Touch drag
 let isDragging = false;
 let dragStart = { x: 0, y: 0 };
 let dragOrigin = { x: 0, y: 0 };
 
-viewport.addEventListener('mousedown', e => {
-  if (e.target.closest('button, a')) return;
-  isDragging = true;
-  dragStart = { x: e.clientX, y: e.clientY };
-  dragOrigin = { x: tx, y: ty };
-  document.body.classList.add('dragging');
-});
-
-window.addEventListener('mousemove', e => {
-  if (!isDragging) return;
-  applyTransform(dragOrigin.x + e.clientX - dragStart.x, dragOrigin.y + e.clientY - dragStart.y, scale);
-});
-
-window.addEventListener('mouseup', () => {
-  isDragging = false;
-  document.body.classList.remove('dragging');
-});
-
-// Touch drag
 viewport.addEventListener('touchstart', e => {
   if (e.target.closest('button, a')) return;
   const t = e.touches[0];
