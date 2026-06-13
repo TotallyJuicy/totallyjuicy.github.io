@@ -122,6 +122,11 @@ function startEdgePan() {
 }
 
 viewport.addEventListener('mousemove', e => {
+  if (e.buttons !== 0) {
+    isPointerInViewport = false;
+    return;
+  }
+
   if (e.target.closest('button, a')) {
     isPointerInViewport = false;
     return;
