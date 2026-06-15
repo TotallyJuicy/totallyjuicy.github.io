@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spotify Listening Analytics Dashboard | TJ Kim</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Space+Mono&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#d4e0d0;--bg2:#c2d4bc;--surface:#b8cdb2;--dark:#3d5c3a;--mid:#6b8f66;--muted:#8aab84;--text:#2a3e28}
+html,body{width:100%;min-height:100%;background:var(--bg);font-family:Inter,sans-serif;color:var(--text);cursor:pointer}
+.page{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:clamp(32px,7vw,110px)}
+.inner{width:min(1040px,88vw)}
+.eyebrow{font-family:"Space Mono",monospace;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);margin-bottom:18px}
+h1{font-size:clamp(42px,7vw,94px);font-weight:300;color:var(--dark);line-height:1.05;letter-spacing:-1px;margin-bottom:28px}
+.lede{font-size:clamp(16px,1.7vw,24px);font-weight:300;color:var(--mid);line-height:1.85;max-width:920px;margin-bottom:44px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(22px,3vw,44px);margin-top:34px}
+.block{border-top:1px solid var(--surface);padding-top:20px}
+.label{font-family:"Space Mono",monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.text{font-size:clamp(14px,1.2vw,17px);font-weight:300;color:var(--mid);line-height:1.85}
+.hint{font-family:"Space Mono",monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-top:52px}
+@media(max-width:720px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body onclick="window.location.href='../index.html'">
+<main class="page">
+  <section class="inner">
+    <div class="eyebrow">Project</div>
+    <h1>Spotify Listening Analytics Dashboard</h1>
+    <p class="lede">Processed 8+ years of Spotify streaming history, removed passive listening, and built dashboard-ready datasets for Power BI.</p>
+    <div class="grid">
+      <div class="block">
+        <div class="label">Overview</div>
+        <div class="text">This project takes raw Spotify listening history and turns it into cleaner data for understanding habits, artists, listening patterns, and changes over time.</div>
+      </div>
+      <div class="block">
+        <div class="label">What I worked on</div>
+        <div class="text">I cleaned the export, filtered out passive listening, shaped the data with Python and Pandas, and prepared the final datasets for a Power BI dashboard.</div>
+      </div>
+    </div>
+    <div class="hint">Click anywhere to return</div>
+  </section>
+</main>
+</body>
+</html>
