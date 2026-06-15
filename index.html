@@ -16,8 +16,8 @@
 html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);font-family:'Inter',sans-serif;color:var(--text)}
 
 /* NAV */
-#nav{position:fixed;top:0;left:0;right:0;height:var(--navH);background:var(--bg2);border-bottom:1px solid var(--surface);display:flex;align-items:center;z-index:300}
-.nav-btn{flex:1;background:transparent;border:none;border-right:1px solid var(--surface);font-family:'Inter',sans-serif;font-size:clamp(13px,1vw,15px);color:var(--muted);padding:0 clamp(14px,2vw,24px);height:100%;cursor:pointer;transition:all .15s;letter-spacing:.35px}
+#nav{position:fixed;top:0;left:0;right:0;height:var(--navH);background:var(--bg2);border-bottom:1px solid var(--surface);display:grid;grid-template-columns:repeat(5,minmax(0,1fr));align-items:center;z-index:300}
+.nav-btn{flex:1;min-width:0;background:transparent;border:none;border-right:1px solid var(--surface);font-family:'Inter',sans-serif;font-size:clamp(13px,1vw,15px);color:var(--muted);padding:0 clamp(14px,2vw,24px);height:100%;cursor:pointer;transition:all .15s;letter-spacing:.35px}
 .nav-btn:last-child{border-right:none}
 .nav-btn:hover{background:var(--surface);color:var(--text)}
 .nav-btn.active{color:var(--dark);font-weight:500;background:rgba(61,92,58,.06)}
@@ -32,7 +32,8 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);font-famil
 #about{background:var(--bg)}
 #projects{background:var(--bg2)}
 #skills{background:var(--bg)}
-#contact{background:var(--bg2)}
+#hobbies{background:var(--bg2)}
+#contact{background:var(--bg)}
 .content-block{pointer-events:auto}
 
 /* ABOUT */
@@ -71,6 +72,12 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);font-famil
 .skill-group{border:1px solid var(--surface);background:rgba(255,255,255,.08);padding:18px;border-radius:3px}
 .skill-heading{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
 .skill-items{font-size:13px;font-weight:300;color:var(--mid);line-height:1.9}
+
+/* HOBBIES */
+.hobby-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(14px,2vw,24px)}
+.hobby-item{border:1px solid var(--surface);background:rgba(255,255,255,.08);padding:clamp(18px,2vw,30px);border-radius:3px}
+.hobby-name{font-size:clamp(16px,1.45vw,24px);font-weight:500;color:var(--dark);margin-bottom:clamp(8px,1vh,12px)}
+.hobby-desc{font-size:clamp(13px,1.1vw,17px);font-weight:300;color:var(--mid);line-height:1.75}
 
 /* CONTACT */
 .clink{display:flex;gap:16px;padding:12px 0;border-bottom:1px solid var(--surface);font-size:13px;font-weight:300}
@@ -135,16 +142,19 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);font-famil
 
 @media (max-width:700px){
   :root{--navH:60px}
-  .nav-btn{font-size:11px;padding:0 8px}
+  .section-inner{max-width:100vw;padding:clamp(28px,6vh,48px) 18px}
+  #nav{display:flex;overflow-x:auto;overflow-y:hidden;scrollbar-width:none}
+  #nav::-webkit-scrollbar{display:none}
+  .nav-btn{flex:0 0 20%;font-size:clamp(9px,2.8vw,11px);padding:0 2px;letter-spacing:0}
   .about-layout{flex-direction:column;align-items:flex-start}
-  .photo-box{width:min(100%,320px);min-width:0;height:min(420px,68vh)}
+  .photo-box{width:100%;max-width:300px;min-width:0;height:min(410px,64vh)}
   .field{flex-direction:column;gap:4px;margin-bottom:13px}
   .field-label{min-width:0}
   .proj-header{flex-direction:column;align-items:flex-start}
   #proj-grid{grid-template-columns:1fr}
   .skill-list{grid-template-columns:1fr}
+  .hobby-list{grid-template-columns:1fr}
   .proj-card-footer{flex-direction:column;align-items:flex-start}
-  #hud{transform:scale(.88);transform-origin:bottom left}
 }
 
 @media (min-width:1200px){
@@ -191,6 +201,34 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);font-famil
 /* combat mode: borders on content blocks */
 body.combat .section{border:2px solid var(--surface)}
 body.combat .proj-card{pointer-events:none}
+
+/* HUD responsive overrides */
+#hud{bottom:clamp(10px,2vw,24px);left:clamp(10px,2vw,24px);gap:clamp(6px,1vw,10px);max-width:calc(100vw - 20px);max-height:calc(100vh - var(--navH) - 20px)}
+#scoreboard{padding:clamp(6px,.9vw,10px) clamp(10px,1.4vw,18px);font-size:clamp(8px,.75vw,10px);min-width:clamp(82px,9vw,118px)}
+#scoreboard span{font-size:clamp(10px,1.1vw,14px)}
+#mode-toggle{padding:clamp(6px,.9vw,10px) clamp(9px,1.2vw,14px);gap:clamp(6px,.9vw,10px);width:fit-content}
+#mode-label{font-size:clamp(8px,.75vw,10px)}
+#toggle-track{width:clamp(28px,3vw,34px);height:clamp(14px,1.7vw,18px);border-radius:999px}
+#toggle-thumb{width:calc(clamp(14px,1.7vw,18px) - 4px);height:calc(clamp(14px,1.7vw,18px) - 4px)}
+#toggle-track.on #toggle-thumb{left:calc(100% - clamp(14px,1.7vw,18px) + 2px)}
+#ctrl-box{padding:clamp(7px,1vw,12px) clamp(8px,1.2vw,14px);width:fit-content}
+.kg{grid-template-columns:repeat(3,clamp(18px,2vw,25px));gap:clamp(3px,.5vw,5px)}
+.k{width:clamp(18px,2vw,25px);height:clamp(18px,2vw,25px);font-size:clamp(7px,.7vw,9px)}
+#ch{font-size:clamp(7px,.7vw,9px);white-space:nowrap}
+
+@media (max-width:520px){
+  #hud{bottom:max(8px,env(safe-area-inset-bottom));left:max(8px,env(safe-area-inset-left));gap:5px}
+  #scoreboard{min-width:82px;padding:6px 9px}
+  #mode-toggle{padding:6px 8px}
+  #ctrl-box{padding:7px 8px}
+  .kg{grid-template-columns:repeat(3,19px);gap:3px}
+  .k{width:19px;height:19px;font-size:7px}
+  #ch{font-size:7px;margin-top:5px}
+}
+
+@media (max-height:520px){
+  #hud{flex-direction:row;align-items:flex-end}
+}
 </style>
 </head>
 <body>
@@ -199,6 +237,7 @@ body.combat .proj-card{pointer-events:none}
   <button class="nav-btn active" onclick="navTo('about',event)">About</button>
   <button class="nav-btn" onclick="navTo('projects',event)">Projects</button>
   <button class="nav-btn" onclick="navTo('skills',event)">Skills</button>
+  <button class="nav-btn" onclick="navTo('hobbies',event)">Hobbies</button>
   <button class="nav-btn" onclick="navTo('contact',event)">Contact</button>
 </nav>
 
@@ -283,10 +322,36 @@ body.combat .proj-card{pointer-events:none}
       </div>
     </div>
 
+    <!-- HOBBIES -->
+    <div class="section" id="hobbies">
+      <div class="section-inner content-block">
+        <div class="eyebrow">04 — Hobbies</div>
+        <div class="section-title">Hobbies</div>
+        <div class="hobby-list">
+          <div class="hobby-item">
+            <div class="hobby-name">Music digging</div>
+            <div class="hobby-desc">I like tracking listening patterns, making playlists, and finding the tiny reasons certain songs stick.</div>
+          </div>
+          <div class="hobby-item">
+            <div class="hobby-name">Competitive games</div>
+            <div class="hobby-desc">I enjoy studying matchups, metas, and the little decisions that turn a close game around.</div>
+          </div>
+          <div class="hobby-item">
+            <div class="hobby-name">Food and recipes</div>
+            <div class="hobby-desc">I like experimenting with recipes, flavor combinations, and small tools that make cooking easier.</div>
+          </div>
+          <div class="hobby-item">
+            <div class="hobby-name">City walks</div>
+            <div class="hobby-desc">I like wandering through new places, taking photos, and noticing how different neighborhoods fit together.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- CONTACT -->
     <div class="section" id="contact">
       <div class="section-inner content-block">
-        <div class="eyebrow">04 — Contact</div>
+        <div class="eyebrow">05 — Contact</div>
         <div class="section-title">Contact</div>
         <div class="clink"><span class="clink-type">Email</span><span class="clink-val"><a href="mailto:tj11564@gmail.com" aria-label="Email TJ Kim"><svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18c1.1 0 2 .9 2 2v10c0 1.1-.9 2-2 2H3c-1.1 0-2-.9-2-2V7c0-1.1.9-2 2-2zm9 8.1L3.8 7.6V17h16.4V7.6L12 13.1zm0-2.2L20.1 7H3.9L12 10.9z"/></svg>tj11564@gmail.com</a></span></div>
         <div class="clink"><span class="clink-type">GitHub</span><span class="clink-val"><a href="https://github.com/TotallyJuicy" target="_blank" rel="noopener noreferrer" aria-label="Open TJ Kim GitHub"><svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56v-2.02c-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.27-1.68-1.27-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.67 1.24 3.32.95.1-.74.4-1.24.73-1.53-2.56-.29-5.25-1.28-5.25-5.69 0-1.26.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.16 1.18A10.9 10.9 0 0 1 12 6.17c.98 0 1.96.13 2.88.39 2.19-1.49 3.15-1.18 3.15-1.18.62 1.58.23 2.75.11 3.04.74.8 1.18 1.82 1.18 3.08 0 4.42-2.7 5.39-5.27 5.68.41.35.78 1.05.78 2.12v3.05c0 .31.21.67.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>github.com/TotallyJuicy</a></span></div>
@@ -378,7 +443,7 @@ const map = document.getElementById('map');
 const NAVH = () => document.getElementById('nav').offsetHeight;
 const WH = () => window.innerHeight - NAVH();
 const WW = () => window.innerWidth;
-const SECTION_IDS = ['about','projects','skills','contact'];
+const SECTION_IDS = ['about','projects','skills','hobbies','contact'];
 let scrollY = 0;
 
 function applyScroll() {
