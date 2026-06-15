@@ -57,7 +57,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);font-famil
 .proj-arr{width:36px;height:36px;background:var(--bg);border:1px solid var(--surface);border-radius:3px;cursor:pointer;font-size:18px;color:var(--mid);display:flex;align-items:center;justify-content:center;transition:all .15s}
 .proj-arr:hover{background:var(--surface);color:var(--dark)}
 #proj-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-.proj-card{background:var(--bg2);border:1px solid var(--surface);padding:28px;border-radius:3px;display:flex;flex-direction:column;gap:12px;min-height:200px;transition:border-color .2s;text-decoration:none;color:inherit;cursor:pointer}
+.proj-card{background:var(--bg2);border:1px solid var(--surface);padding:28px;border-radius:3px;display:flex;flex-direction:column;gap:12px;min-height:200px;transition:border-color .2s}
 .proj-card:hover{border-color:var(--muted)}
 .proj-card-name{font-size:17px;font-weight:500;color:var(--dark)}
 .proj-card-desc{font-size:13px;font-weight:300;color:var(--mid);line-height:1.75;flex:1}
@@ -403,12 +403,12 @@ body.combat .proj-card{pointer-events:none}
 // ── PROJECTS DATA ──────────────────────────────────────────────
 // To add a project: add an object to this array with name, desc, tags (array), and link (url string or '').
 const PROJECTS = [
-  {name:'Spotify Listening Analytics Dashboard', desc:'Processed 8+ years of Spotify streaming history, removed passive listening, and built dashboard-ready datasets for Power BI.', tags:['Python','Pandas','Power BI'], link:'projects/spotify-listening-analytics-dashboard.html'},
-  {name:'Letterboxd Rater Analysis', desc:'Analyzed 10.4M movie ratings with SQL to compare heavy and casual users, consensus ratings, and score variance.', tags:['SQL','MySQL','Analysis'], link:'projects/letterboxd-rater-analysis.html'},
-  {name:'Steam Review Sentiment Classification', desc:'Built a sentiment classifier on 50,000 Steam reviews using TF-IDF and compared Naive Bayes, KNN, and Decision Tree models.', tags:['Python','Scikit-learn','NLP'], link:'projects/steam-review-sentiment-classification.html'},
-  {name:'Pokémon Showdown Meta Analysis', desc:'Parsed Smogon usage data into Pandas DataFrames and identified meta-dominant competitive trends.', tags:['Python','Pandas','Data Viz'], link:'projects/pokemon-showdown-meta-analysis.html'},
-  {name:'Wikipedia Knowledge Graph', desc:'Built a linked-topic graph from Wikipedia pages with NetworkX and visualized centrality and clustering structure.', tags:['Python','NetworkX','Gephi'], link:'projects/wikipedia-knowledge-graph.html'},
-  {name:'CocktailMixer', desc:'Built a recipe web app with stored drinks, saved recipes, and a clean React interface.', tags:['React','TypeScript','Supabase'], link:'projects/cocktailmixer.html'},
+  {name:'Spotify Listening Analytics Dashboard', desc:'Processed 8+ years of Spotify streaming history, removed passive listening, and built dashboard-ready datasets for Power BI.', tags:['Python','Pandas','Power BI'], link:''},
+  {name:'Letterboxd Rater Analysis', desc:'Analyzed 10.4M movie ratings with SQL to compare heavy and casual users, consensus ratings, and score variance.', tags:['SQL','MySQL','Analysis'], link:''},
+  {name:'Steam Review Sentiment Classification', desc:'Built a sentiment classifier on 50,000 Steam reviews using TF-IDF and compared Naive Bayes, KNN, and Decision Tree models.', tags:['Python','Scikit-learn','NLP'], link:''},
+  {name:'Pokémon Showdown Meta Analysis', desc:'Parsed Smogon usage data into Pandas DataFrames and identified meta-dominant competitive trends.', tags:['Python','Pandas','Data Viz'], link:''},
+  {name:'Wikipedia Knowledge Graph', desc:'Built a linked-topic graph from Wikipedia pages with NetworkX and visualized centrality and clustering structure.', tags:['Python','NetworkX','Gephi'], link:''},
+  {name:'CocktailMixer', desc:'Built a recipe web app with stored drinks, saved recipes, and a clean React interface.', tags:['React','TypeScript','Supabase'], link:''},
 ];
 
 const PER_PAGE = 4;
@@ -421,14 +421,14 @@ function renderProjects() {
   counter.textContent = (projPage_+1) + ' / ' + pages;
   const slice = PROJECTS.slice(projPage_*PER_PAGE, projPage_*PER_PAGE+PER_PAGE);
   grid.innerHTML = slice.map(p => `
-    <a class="proj-card" href="${p.link}" aria-label="Open ${p.name}">
+    <div class="proj-card">
       <div class="proj-card-name">${p.name}</div>
       <div class="proj-card-desc">${p.desc}</div>
       <div class="proj-card-footer">
         <div class="proj-card-tags">${p.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
-        <span class="proj-link">View ↗</span>
+        ${p.link ? `<a class="proj-link" href="${p.link}" target="_blank">View ↗</a>` : ''}
       </div>
-    </a>`).join('');
+    </div>`).join('');
 }
 function projPage(dir) {
   const pages = Math.ceil(PROJECTS.length / PER_PAGE);
@@ -478,10 +478,6 @@ function navTo(id, e) {
   if(e && e.target){ document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active')); e.target.classList.add('active'); }
 }
 window.addEventListener('wheel', e=>{ scrollY+=e.deltaY; applyScroll(); },{passive:true});
-window.addEventListener('load', () => {
-  const id = location.hash.replace('#', '');
-  if (SECTION_IDS.includes(id)) requestAnimationFrame(() => navTo(id));
-});
 
 // ── PLAYER ──────────────────────────────────────────────────────
 const playerEl = document.getElementById('player');
