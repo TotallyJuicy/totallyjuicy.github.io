@@ -74,10 +74,8 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);font-famil
 .skill-items{font-size:13px;font-weight:300;color:var(--mid);line-height:1.9}
 
 /* HOBBIES */
-.hobby-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(14px,2vw,24px)}
-.hobby-item{border:1px solid var(--surface);background:rgba(255,255,255,.08);padding:clamp(18px,2vw,30px);border-radius:3px}
-.hobby-name{font-size:clamp(16px,1.45vw,24px);font-weight:500;color:var(--dark);margin-bottom:clamp(8px,1vh,12px)}
-.hobby-desc{font-size:clamp(13px,1.1vw,17px);font-weight:300;color:var(--mid);line-height:1.75}
+#hobbies .section-inner{max-width:min(1180px,88vw)}
+.hobby-flow{font-size:clamp(16px,1.45vw,22px);font-weight:300;color:var(--mid);line-height:2;max-width:980px}
 
 /* CONTACT */
 .clink{display:flex;gap:16px;padding:12px 0;border-bottom:1px solid var(--surface);font-size:13px;font-weight:300}
@@ -153,7 +151,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);font-famil
   .proj-header{flex-direction:column;align-items:flex-start}
   #proj-grid{grid-template-columns:1fr}
   .skill-list{grid-template-columns:1fr}
-  .hobby-list{grid-template-columns:1fr}
+  .hobby-flow{font-size:clamp(14px,4vw,17px)}
   .proj-card-footer{flex-direction:column;align-items:flex-start}
 }
 
@@ -327,24 +325,7 @@ body.combat .proj-card{pointer-events:none}
       <div class="section-inner content-block">
         <div class="eyebrow">04 — Hobbies</div>
         <div class="section-title">Hobbies</div>
-        <div class="hobby-list">
-          <div class="hobby-item">
-            <div class="hobby-name">Music digging</div>
-            <div class="hobby-desc">I like tracking listening patterns, making playlists, and finding the tiny reasons certain songs stick.</div>
-          </div>
-          <div class="hobby-item">
-            <div class="hobby-name">Competitive games</div>
-            <div class="hobby-desc">I enjoy studying matchups, metas, and the little decisions that turn a close game around.</div>
-          </div>
-          <div class="hobby-item">
-            <div class="hobby-name">Food and recipes</div>
-            <div class="hobby-desc">I like experimenting with recipes, flavor combinations, and small tools that make cooking easier.</div>
-          </div>
-          <div class="hobby-item">
-            <div class="hobby-name">City walks</div>
-            <div class="hobby-desc">I like wandering through new places, taking photos, and noticing how different neighborhoods fit together.</div>
-          </div>
-        </div>
+        <div class="hobby-flow">I like to listen to music and curate playlists, and I like to play music too, especially guitar, piano, and clarinet. I also like playing video games such as StarCraft II, League of Legends, Minecraft, and whatever else has a good loop to sink into. Outside of that, I like working out at the gym and listening to philosophical podcasts.</div>
       </div>
     </div>
 
