@@ -8,7 +8,7 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{--bg:#d4e0d0;--surface:#b8cdb2;--dark:#3d5c3a;--mid:#6b8f66;--muted:#8aab84;--text:#2a3e28}
-html,body{width:100%;min-height:100%;background:var(--bg);font-family:Inter,sans-serif;color:var(--text);cursor:pointer}
+html,body{width:100%;min-height:100%;background:var(--bg);font-family:Inter,sans-serif;color:var(--text)}
 .page{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:clamp(32px,7vw,110px)}
 .inner{width:min(1040px,88vw)}
 .eyebrow,.label,.hint{font-family:"Space Mono",monospace;text-transform:uppercase;color:var(--muted)}
@@ -21,9 +21,10 @@ h1{font-size:clamp(42px,7vw,94px);font-weight:300;color:var(--dark);line-height:
 .text{font-size:clamp(14px,1.2vw,17px);font-weight:300;color:var(--mid);line-height:1.85}
 .hint{font-size:9px;letter-spacing:1px;margin-top:52px}
 @media(max-width:720px){.grid{grid-template-columns:1fr}}
+.back-main{display:inline-flex;width:fit-content;margin-top:52px;font-family:"Space Mono",monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);text-decoration:none;border:1px solid var(--surface);padding:8px 12px}.back-main:hover{border-color:var(--dark);color:var(--dark)}
 </style>
 </head>
-<body onclick="window.location.href='../index.html'">
+<body>
 <main class="page">
   <section class="inner">
     <div class="eyebrow">Project</div>
@@ -33,7 +34,7 @@ h1{font-size:clamp(42px,7vw,94px);font-weight:300;color:var(--dark);line-height:
       <div class="block"><div class="label">Overview</div><div class="text">CocktailMixer is a small web app for browsing, saving, and managing drink recipes through a simple interface.</div></div>
       <div class="block"><div class="label">What I worked on</div><div class="text">I worked on the React and TypeScript interface, connected the app to Supabase, and built flows for stored drinks and saved recipes.</div></div>
     </div>
-    <div class="hint">Click anywhere to return</div>
+    <a class="back-main" href="../">Back to main</a>
   </section>
 </main>
 </body>
