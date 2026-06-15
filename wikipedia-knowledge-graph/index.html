@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pokémon Showdown Meta Analysis | TJ Kim</title>
+<title>Wikipedia Knowledge Graph | TJ Kim</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Space+Mono&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -21,18 +21,18 @@ h1{font-size:clamp(42px,7vw,94px);font-weight:300;color:var(--dark);line-height:
 .text{font-size:clamp(14px,1.2vw,17px);font-weight:300;color:var(--mid);line-height:1.85}
 .hint{font-size:9px;letter-spacing:1px;margin-top:52px}
 @media(max-width:720px){.grid{grid-template-columns:1fr}}
-.back-main{display:inline-flex;width:fit-content;margin-top:52px;font-family:"Space Mono",monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);text-decoration:none;border:1px solid var(--surface);padding:8px 12px}.back-main:hover{border-color:var(--dark);color:var(--dark)}
+.back-main{position:fixed;top:24px;left:24px;z-index:5;display:inline-flex;width:fit-content;font-family:"Space Mono",monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);text-decoration:none;border:1px solid var(--surface);padding:8px 12px;background:var(--bg)}.back-main:hover{border-color:var(--dark);color:var(--dark)}
 </style>
 </head>
 <body>
 <main class="page">
   <section class="inner">
     <div class="eyebrow">Project</div>
-    <h1>Pokémon Showdown Meta Analysis</h1>
-    <p class="lede">Parsed Smogon usage data into Pandas DataFrames and identified meta-dominant competitive trends.</p>
+    <h1>Wikipedia Knowledge Graph</h1>
+    <p class="lede">Built a linked-topic graph from Wikipedia pages with NetworkX and visualized centrality and clustering structure.</p>
     <div class="grid">
-      <div class="block"><div class="label">Overview</div><div class="text">This project explores competitive Pokémon usage data to see which Pokémon, strategies, and trends shape the meta over time.</div></div>
-      <div class="block"><div class="label">What I worked on</div><div class="text">I parsed Smogon usage files, structured them into Pandas DataFrames, and looked for high-usage patterns and shifts.</div></div>
+      <div class="block"><div class="label">Overview</div><div class="text">This project treats Wikipedia pages as a connected graph to explore how topics link together and which pages become important bridges.</div></div>
+      <div class="block"><div class="label">What I worked on</div><div class="text">I collected linked pages, built the graph with NetworkX, and used graph metrics and visualization tools to inspect centrality and clusters.</div></div>
     </div>
     <a class="back-main" href="../">Back to main</a>
   </section>
