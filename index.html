@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TJ Kim</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Space+Mono&display=swap" rel="stylesheet">
 <style>
@@ -10,7 +11,7 @@
 :root{
   --bg:#d4e0d0;--bg2:#c2d4bc;--surface:#b8cdb2;
   --dark:#3d5c3a;--mid:#6b8f66;--muted:#8aab84;--text:#2a3e28;
-  --navH:clamp(68px,7vh,84px);
+  --navH:clamp(68px,7vh,96px);
 }
 html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);font-family:'Inter',sans-serif;color:var(--text)}
 
@@ -83,38 +84,42 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);font-famil
 
 /* RESPONSIVE SCALING */
 :root{
-  --content-pad-y:clamp(36px,7vh,90px);
-  --content-pad-x:clamp(20px,5vw,72px);
-  --gap-lg:clamp(22px,4vw,56px);
-  --gap-md:clamp(12px,2vw,24px);
+  --content-pad-y:clamp(42px,8vh,118px);
+  --content-pad-x:clamp(24px,7vw,124px);
+  --gap-lg:clamp(28px,6vw,96px);
+  --gap-md:clamp(12px,2.2vw,34px);
+  --photo-w:clamp(190px,24vw,420px);
+  --photo-h:clamp(250px,34vw,560px);
 }
-.section-inner{max-width:min(820px,90vw);padding:var(--content-pad-y) var(--content-pad-x)}
+.section-inner{max-width:min(1180px,92vw);padding:var(--content-pad-y) var(--content-pad-x)}
 .eyebrow{font-size:clamp(8px,.75vw,10px);margin-bottom:clamp(10px,1.5vh,16px)}
-.section-title{font-size:clamp(28px,5vw,52px);letter-spacing:clamp(-2px,-.15vw,-1px);margin-bottom:clamp(20px,3vh,34px)}
+.section-title{font-size:clamp(34px,5.8vw,82px);letter-spacing:clamp(-2px,-.15vw,-1px);margin-bottom:clamp(22px,3.4vh,44px)}
 .divider{margin:clamp(18px,3vh,30px) 0}
-.body-text{font-size:clamp(12px,1.35vw,16px);line-height:1.9}
+.body-text{font-size:clamp(14px,1.35vw,20px);line-height:1.9}
 .field{margin-bottom:clamp(10px,1.8vh,16px);gap:var(--gap-md)}
-.field-label{font-size:clamp(8px,.75vw,10px);min-width:clamp(68px,10vw,96px)}
-.field-val{font-size:clamp(12px,1.25vw,15px)}
-.about-layout{gap:var(--gap-lg)}
-.photo-box{width:clamp(120px,18vw,210px);min-width:clamp(120px,18vw,210px);height:clamp(120px,18vw,210px);font-size:clamp(7px,.75vw,9px)}
-#projects .section-inner{max-width:min(1300px,94vw);padding:var(--content-pad-y) var(--content-pad-x)}
+.field-label{font-size:clamp(8px,.75vw,11px);min-width:clamp(68px,10vw,112px)}
+.field-val{font-size:clamp(13px,1.25vw,18px)}
+#about .section-inner{max-width:min(1360px,94vw)}
+.about-layout{gap:var(--gap-lg);align-items:center}
+.photo-box{width:var(--photo-w);min-width:var(--photo-w);height:var(--photo-h);font-size:clamp(7px,.75vw,9px);border-style:solid;cursor:default}
+.photo-box img{object-position:center 58%}
+#projects .section-inner{max-width:min(1500px,94vw);padding:var(--content-pad-y) var(--content-pad-x)}
 .proj-header{margin-bottom:clamp(22px,4vh,40px);gap:var(--gap-md)}
 .proj-nav-btns{gap:clamp(8px,1.2vw,14px)}
-.proj-arr{width:clamp(32px,3.5vw,42px);height:clamp(32px,3.5vw,42px);font-size:clamp(16px,1.8vw,22px)}
+.proj-arr{width:clamp(36px,3.5vw,52px);height:clamp(36px,3.5vw,52px);font-size:clamp(18px,1.8vw,26px)}
 #proj-counter{font-size:clamp(8px,.9vw,11px)!important}
-#proj-grid{gap:clamp(14px,2vw,28px)}
-.proj-card{padding:clamp(18px,2.6vw,34px);gap:clamp(10px,1.4vw,16px);min-height:clamp(165px,24vh,240px)}
-.proj-card-name{font-size:clamp(15px,1.5vw,20px)}
-.proj-card-desc{font-size:clamp(12px,1.15vw,15px);line-height:1.75}
+#proj-grid{gap:clamp(18px,2.4vw,38px)}
+.proj-card{padding:clamp(22px,2.8vw,44px);gap:clamp(12px,1.5vw,20px);min-height:clamp(190px,26vh,300px)}
+.proj-card-name{font-size:clamp(17px,1.6vw,25px)}
+.proj-card-desc{font-size:clamp(13px,1.15vw,18px);line-height:1.75}
 .proj-card-footer{gap:clamp(10px,1.4vw,16px)}
 .proj-card-tags{gap:clamp(4px,.7vw,8px)}
 .tag{font-size:clamp(7px,.7vw,9px);padding:clamp(2px,.35vw,4px) clamp(6px,.8vw,9px)}
 .proj-link{font-size:clamp(8px,.8vw,10px);padding:clamp(4px,.45vw,6px) clamp(8px,.9vw,12px)}
 .skill-list{gap:clamp(12px,2vw,20px)}
-.skill-group{padding:clamp(14px,2vw,22px)}
+.skill-group{padding:clamp(18px,2vw,30px)}
 .skill-heading{font-size:clamp(8px,.75vw,10px)}
-.skill-items{font-size:clamp(12px,1.15vw,15px)}
+.skill-items{font-size:clamp(13px,1.15vw,18px)}
 #skills .body-text{font-size:clamp(9px,1vw,12px)!important}
 .clink{gap:var(--gap-md);padding:clamp(10px,1.6vh,15px) 0;font-size:clamp(12px,1.15vw,15px)}
 .clink-type{font-size:clamp(8px,.75vw,10px);min-width:clamp(54px,8vw,72px)}
@@ -132,6 +137,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);font-famil
   :root{--navH:60px}
   .nav-btn{font-size:11px;padding:0 8px}
   .about-layout{flex-direction:column;align-items:flex-start}
+  .photo-box{width:min(100%,320px);min-width:0;height:min(420px,68vh)}
   .field{flex-direction:column;gap:4px;margin-bottom:13px}
   .field-label{min-width:0}
   .proj-header{flex-direction:column;align-items:flex-start}
@@ -142,8 +148,15 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);font-famil
 }
 
 @media (min-width:1200px){
-  .section-inner{max-width:min(980px,72vw)}
-  #projects .section-inner{max-width:min(1380px,94vw)}
+  .section-inner{max-width:min(1320px,88vw)}
+  #about .section-inner{max-width:min(1480px,92vw)}
+  #projects .section-inner{max-width:min(1560px,94vw)}
+}
+
+@media (min-width:1600px){
+  .section-inner{max-width:min(1540px,88vw)}
+  #about .section-inner{max-width:min(1680px,90vw)}
+  .body-text{max-width:900px}
 }
 
 /* PLAYER */
@@ -199,7 +212,7 @@ body.combat .proj-card{pointer-events:none}
         <div class="eyebrow">01 — About</div>
         <div class="about-layout">
           <div class="photo-box" id="photo-box">
-            <img id="photo-img" src="IMG_1318.jpeg" alt="TJ Kim" style="display:block">
+            <img id="photo-img" src="IMG_3080.jpeg" alt="TJ Kim" style="display:block">
             <div id="photo-hint" style="display:none">⬆<br>your photo</div>
           </div>
           <div style="flex:1">
@@ -395,7 +408,7 @@ window.addEventListener('wheel', e=>{ scrollY+=e.deltaY; applyScroll(); },{passi
 
 // ── PLAYER ──────────────────────────────────────────────────────
 const playerEl = document.getElementById('player');
-let px = WW()/2, py = WH()/2;
+let px = 72, py = 140;
 let keys = {};
 const SPD = 4;
 const PSIZE = 9; // collision radius
