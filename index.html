@@ -1,323 +1,606 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TotallyJuicy — Portfolio</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8">
+<title>TJ Kim</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Space+Mono&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+::selection{background:#8aab84;color:#2a3e28}
+:root{
+  --bg:#d4e0d0;--bg2:#c2d4bc;--surface:#b8cdb2;
+  --dark:#3d5c3a;--mid:#6b8f66;--muted:#8aab84;--text:#2a3e28;
+  --navH:clamp(68px,7vh,84px);
+}
+html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);font-family:'Inter',sans-serif;color:var(--text)}
+
+/* NAV */
+#nav{position:fixed;top:0;left:0;right:0;height:var(--navH);background:var(--bg2);border-bottom:1px solid var(--surface);display:flex;align-items:center;z-index:300}
+.nav-btn{flex:1;background:transparent;border:none;border-right:1px solid var(--surface);font-family:'Inter',sans-serif;font-size:clamp(13px,1vw,15px);color:var(--muted);padding:0 clamp(14px,2vw,24px);height:100%;cursor:pointer;transition:all .15s;letter-spacing:.35px}
+.nav-btn:last-child{border-right:none}
+.nav-btn:hover{background:var(--surface);color:var(--text)}
+.nav-btn.active{color:var(--dark);font-weight:500;background:rgba(61,92,58,.06)}
+
+/* WORLD */
+#world{position:fixed;top:var(--navH);left:0;right:0;bottom:0;overflow:hidden}
+#map{position:absolute;width:100%;transform-origin:0 0}
+
+/* SECTIONS */
+.section{width:100%;min-height:calc(100vh - var(--navH));display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--surface)}
+/* Explicit section colors. Do not rely on nth-child because section order changes. */
+#about{background:var(--bg)}
+#projects{background:var(--bg2)}
+#skills{background:var(--bg)}
+#contact{background:var(--bg2)}
+.content-block{pointer-events:auto}
+
+/* ABOUT */
+.section-inner{max-width:760px;width:100%;padding:60px 40px}
+.eyebrow{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+.section-title{font-size:36px;font-weight:300;color:var(--dark);letter-spacing:-1px;margin-bottom:28px}
+.divider{height:1px;background:var(--surface);margin:24px 0}
+.body-text{font-size:14px;font-weight:300;color:var(--mid);line-height:1.9}
+.field{margin-bottom:14px;display:flex;gap:16px}
+.field-label{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);min-width:80px;padding-top:2px}
+.field-val{font-size:13px;color:var(--mid);font-weight:300}
+.about-layout{display:flex;gap:40px;align-items:flex-start}
+.photo-box{width:160px;min-width:160px;height:160px;background:var(--surface);border:2px dashed var(--muted);border-radius:4px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;color:var(--muted);font-family:'Space Mono',monospace;font-size:8px;letter-spacing:1px;text-align:center;cursor:pointer;transition:border-color .2s}
+.photo-box:hover{border-color:var(--dark)}
+.photo-box img{width:100%;height:100%;object-fit:cover;border-radius:2px;display:none}
+
+/* PROJECTS */
+#projects .section-inner{max-width:100%;padding:60px 5vw}
+.proj-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:32px}
+.proj-nav-btns{display:flex;align-items:center;gap:10px}
+.proj-arr{width:36px;height:36px;background:var(--bg);border:1px solid var(--surface);border-radius:3px;cursor:pointer;font-size:18px;color:var(--mid);display:flex;align-items:center;justify-content:center;transition:all .15s}
+.proj-arr:hover{background:var(--surface);color:var(--dark)}
+#proj-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.proj-card{background:var(--bg2);border:1px solid var(--surface);padding:28px;border-radius:3px;display:flex;flex-direction:column;gap:12px;min-height:200px;transition:border-color .2s}
+.proj-card:hover{border-color:var(--muted)}
+.proj-card-name{font-size:17px;font-weight:500;color:var(--dark)}
+.proj-card-desc{font-size:13px;font-weight:300;color:var(--mid);line-height:1.75;flex:1}
+.proj-card-footer{display:flex;justify-content:space-between;align-items:flex-end;gap:12px}
+.proj-card-tags{display:flex;gap:5px;flex-wrap:wrap}
+.tag{font-family:'Space Mono',monospace;font-size:8px;padding:2px 7px;border:1px solid var(--muted);color:var(--muted);border-radius:2px}
+.proj-link{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.5px;color:var(--mid);text-decoration:none;padding:4px 10px;border:1px solid var(--surface);border-radius:2px;white-space:nowrap;transition:all .15s}
+.proj-link:hover{border-color:var(--dark);color:var(--dark)}
+
+/* SKILLS */
+.skill-list{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.skill-group{border:1px solid var(--surface);background:rgba(255,255,255,.08);padding:18px;border-radius:3px}
+.skill-heading{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.skill-items{font-size:13px;font-weight:300;color:var(--mid);line-height:1.9}
+
+/* CONTACT */
+.clink{display:flex;gap:16px;padding:12px 0;border-bottom:1px solid var(--surface);font-size:13px;font-weight:300}
+.clink:last-child{border-bottom:none}
+.clink-type{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);min-width:60px;padding-top:2px}
+.clink-val{color:var(--mid)}
+.clink-val a{color:var(--mid);text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:color .15s}
+.clink-val a:hover{color:var(--dark)}
+.social-icon{width:16px;height:16px;display:inline-block;flex:0 0 16px;fill:currentColor}
+
+
+/* RESPONSIVE SCALING */
+:root{
+  --content-pad-y:clamp(36px,7vh,90px);
+  --content-pad-x:clamp(20px,5vw,72px);
+  --gap-lg:clamp(22px,4vw,56px);
+  --gap-md:clamp(12px,2vw,24px);
+}
+.section-inner{max-width:min(820px,90vw);padding:var(--content-pad-y) var(--content-pad-x)}
+.eyebrow{font-size:clamp(8px,.75vw,10px);margin-bottom:clamp(10px,1.5vh,16px)}
+.section-title{font-size:clamp(28px,5vw,52px);letter-spacing:clamp(-2px,-.15vw,-1px);margin-bottom:clamp(20px,3vh,34px)}
+.divider{margin:clamp(18px,3vh,30px) 0}
+.body-text{font-size:clamp(12px,1.35vw,16px);line-height:1.9}
+.field{margin-bottom:clamp(10px,1.8vh,16px);gap:var(--gap-md)}
+.field-label{font-size:clamp(8px,.75vw,10px);min-width:clamp(68px,10vw,96px)}
+.field-val{font-size:clamp(12px,1.25vw,15px)}
+.about-layout{gap:var(--gap-lg)}
+.photo-box{width:clamp(120px,18vw,210px);min-width:clamp(120px,18vw,210px);height:clamp(120px,18vw,210px);font-size:clamp(7px,.75vw,9px)}
+#projects .section-inner{max-width:min(1300px,94vw);padding:var(--content-pad-y) var(--content-pad-x)}
+.proj-header{margin-bottom:clamp(22px,4vh,40px);gap:var(--gap-md)}
+.proj-nav-btns{gap:clamp(8px,1.2vw,14px)}
+.proj-arr{width:clamp(32px,3.5vw,42px);height:clamp(32px,3.5vw,42px);font-size:clamp(16px,1.8vw,22px)}
+#proj-counter{font-size:clamp(8px,.9vw,11px)!important}
+#proj-grid{gap:clamp(14px,2vw,28px)}
+.proj-card{padding:clamp(18px,2.6vw,34px);gap:clamp(10px,1.4vw,16px);min-height:clamp(165px,24vh,240px)}
+.proj-card-name{font-size:clamp(15px,1.5vw,20px)}
+.proj-card-desc{font-size:clamp(12px,1.15vw,15px);line-height:1.75}
+.proj-card-footer{gap:clamp(10px,1.4vw,16px)}
+.proj-card-tags{gap:clamp(4px,.7vw,8px)}
+.tag{font-size:clamp(7px,.7vw,9px);padding:clamp(2px,.35vw,4px) clamp(6px,.8vw,9px)}
+.proj-link{font-size:clamp(8px,.8vw,10px);padding:clamp(4px,.45vw,6px) clamp(8px,.9vw,12px)}
+.skill-list{gap:clamp(12px,2vw,20px)}
+.skill-group{padding:clamp(14px,2vw,22px)}
+.skill-heading{font-size:clamp(8px,.75vw,10px)}
+.skill-items{font-size:clamp(12px,1.15vw,15px)}
+#skills .body-text{font-size:clamp(9px,1vw,12px)!important}
+.clink{gap:var(--gap-md);padding:clamp(10px,1.6vh,15px) 0;font-size:clamp(12px,1.15vw,15px)}
+.clink-type{font-size:clamp(8px,.75vw,10px);min-width:clamp(54px,8vw,72px)}
+#hud{bottom:clamp(12px,2vw,24px);left:clamp(12px,2vw,24px);gap:clamp(6px,1vw,10px)}
+#scoreboard{padding:clamp(7px,.9vw,10px) clamp(12px,1.4vw,18px);font-size:clamp(8px,.75vw,10px);min-width:clamp(88px,10vw,118px)}
+#scoreboard span{font-size:clamp(11px,1.1vw,14px)}
+#mode-toggle{padding:clamp(7px,.9vw,10px) clamp(10px,1.2vw,14px);gap:clamp(6px,.9vw,10px)}
+#mode-label{font-size:clamp(8px,.75vw,10px)}
+#ctrl-box{padding:clamp(8px,1vw,12px) clamp(10px,1.2vw,14px)}
+.kg{grid-template-columns:repeat(3,clamp(20px,2vw,25px));gap:clamp(3px,.5vw,5px)}
+.k{width:clamp(20px,2vw,25px);height:clamp(20px,2vw,25px);font-size:clamp(7px,.7vw,9px)}
+#ch{font-size:clamp(7px,.7vw,9px)}
+
+@media (max-width:700px){
+  :root{--navH:60px}
+  .nav-btn{font-size:11px;padding:0 8px}
+  .about-layout{flex-direction:column;align-items:flex-start}
+  .field{flex-direction:column;gap:4px;margin-bottom:13px}
+  .field-label{min-width:0}
+  .proj-header{flex-direction:column;align-items:flex-start}
+  #proj-grid{grid-template-columns:1fr}
+  .skill-list{grid-template-columns:1fr}
+  .proj-card-footer{flex-direction:column;align-items:flex-start}
+  #hud{transform:scale(.88);transform-origin:bottom left}
+}
+
+@media (min-width:1200px){
+  .section-inner{max-width:min(980px,72vw)}
+  #projects .section-inner{max-width:min(1380px,94vw)}
+}
+
+/* PLAYER */
+#player{position:fixed;width:18px;height:24px;z-index:200;pointer-events:none}
+#player-head{position:absolute;top:0;left:50%;transform:translateX(-50%);width:12px;height:12px;background:var(--dark);border-radius:50%}
+#player-body{position:absolute;top:11px;left:50%;transform:translateX(-50%);width:10px;height:9px;background:var(--mid)}
+#player-legs{position:absolute;top:20px;left:50%;transform:translateX(-50%);width:10px;height:4px;background:var(--dark)}
+#player-shadow{position:absolute;bottom:-4px;left:50%;transform:translateX(-50%);width:14px;height:4px;background:rgba(61,92,58,.2);border-radius:50%}
+
+/* BULLETS & MOBS — fixed layer */
+#game-layer{position:fixed;top:var(--navH);left:0;right:0;bottom:0;pointer-events:none;z-index:150}
+.bullet{position:absolute;width:6px;height:6px;background:var(--dark);border-radius:50%}
+.mob{position:absolute;width:16px;height:16px;background:#8b3a3a;border-radius:50%;border:2px solid #5c1c1c;pointer-events:none}
+
+/* GAME HUD */
+#hud{position:fixed;bottom:20px;left:20px;z-index:300;display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+#scoreboard{background:var(--bg2);border:2px solid var(--surface);padding:8px 14px;font-family:'Space Mono',monospace;font-size:9px;color:var(--mid);letter-spacing:1px;min-width:100px}
+#scoreboard span{color:var(--dark);font-weight:700;font-size:12px}
+#mode-toggle{background:var(--bg2);border:2px solid var(--surface);padding:8px 12px;display:flex;align-items:center;gap:8px;cursor:pointer}
+#mode-label{font-family:'Space Mono',monospace;font-size:9px;color:var(--mid);letter-spacing:1px;text-transform:uppercase;user-select:none}
+#toggle-track{width:32px;height:16px;background:var(--surface);border-radius:8px;position:relative;transition:background .2s}
+#toggle-track.on{background:var(--mid)}
+#toggle-thumb{width:12px;height:12px;background:var(--bg);border-radius:50%;position:absolute;top:2px;left:2px;transition:left .2s;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+#toggle-track.on #toggle-thumb{left:18px}
+#ctrl-box{background:var(--bg2);border:2px solid var(--surface);padding:10px 12px}
+.kg{display:grid;grid-template-columns:repeat(3,22px);gap:3px;justify-content:center}
+.k{width:22px;height:22px;background:var(--bg);border:1px solid var(--surface);border-radius:3px;display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-size:8px;color:var(--muted);transition:all .08s}
+.k.ke{background:transparent;border-color:transparent}
+.k.pressed{background:var(--dark);color:var(--bg);border-color:var(--dark)}
+#ch{font-family:'Space Mono',monospace;font-size:8px;color:var(--muted);text-align:center;margin-top:6px}
+
+/* combat mode: borders on content blocks */
+body.combat .section{border:2px solid var(--surface)}
+body.combat .proj-card{pointer-events:none}
+</style>
 </head>
 <body>
 
-  <!-- NAV -->
-  <nav class="nav">
-    <div class="nav-name">TotallyJuicy</div>
-    <div class="nav-links">
-      <button class="nav-btn" data-target="about">About</button>
-      <button class="nav-btn" data-target="data">Data</button>
-      <button class="nav-btn" data-target="cybersecurity">Cybersecurity</button>
-      <button class="nav-btn" data-target="gamedev">Game Dev</button>
-      <button class="nav-btn" data-target="other">Other</button>
-      <button class="nav-btn" data-target="resume">Resume</button>
-      <button class="nav-btn" data-target="contact">Contact</button>
+<nav id="nav">
+  <button class="nav-btn active" onclick="navTo('about',event)">About</button>
+  <button class="nav-btn" onclick="navTo('projects',event)">Projects</button>
+  <button class="nav-btn" onclick="navTo('skills',event)">Skills</button>
+  <button class="nav-btn" onclick="navTo('contact',event)">Contact</button>
+</nav>
+
+<div id="world">
+  <div id="map">
+
+
+    <!-- ABOUT -->
+    <div class="section" id="about">
+      <div class="section-inner content-block">
+        <div class="eyebrow">01 — About</div>
+        <div class="about-layout">
+          <div class="photo-box" id="photo-box">
+            <img id="photo-img" src="IMG_1318.jpeg" alt="TJ Kim" style="display:block">
+            <div id="photo-hint" style="display:none">⬆<br>your photo</div>
+          </div>
+          <div style="flex:1">
+            <div class="section-title">TJ Kim</div>
+            <div class="field"><span class="field-label">Role</span><span class="field-val">Information Science student</span></div>
+            <div class="field"><span class="field-label">Education</span><span class="field-val">B.S. Information Science · University of Maryland</span></div>
+            <div class="field"><span class="field-label">Focus</span><span class="field-val">Data analysis · SQL · dashboards · machine learning</span></div>
+            <div class="field"><span class="field-label">Stack</span><span class="field-val">Python · SQL · Pandas · Power BI · Excel</span></div>
+            <div class="divider"></div>
+            <div class="body-text">Hi, I’m TJ. I graduated with a B.S. in Information Science from the University of Maryland. I’ve loved problem-solving and figuring out why things work the way they do since I was young, which is what pulled me toward data analytics. It gave me a way to analyze patterns and understand the reasons behind them. Whether I’m breaking down my Spotify listening habits or studying meta behavior in my favorite games, I get a real thrill from finding the underlying reason behind the pattern.</div>
+          </div>
+        </div>
+      </div>
     </div>
-  </nav>
+    <input type="file" id="photo-input" accept="image/*" style="display:none">
 
-  <!-- CANVAS -->
-  <div id="viewport">
-    <div id="world">
-
-      <!-- HERO -->
-      <section class="section" id="about" style="left: 2000px; top: 1100px;">
-        <div class="tag">Hello world</div>
-        <h1 class="hero-name">TotallyJuicy</h1>
-        <p class="hero-handle">Taejeong Kim · TJ</p>
-        <p class="hero-sub">Information Science student.<br>Exploring <em>cybersecurity</em>, <em>data</em>,<br>and <em>game creation</em>.</p>
-        <p class="hero-body">Information Science student at the University of Maryland. I build things across cybersecurity, data analysis, and (soon) game dev. Fluent in Korean, studying for CompTIA Security+, and always working on something new.</p>
-        <div class="hero-btns">
-          <button class="pill-btn" data-target="cybersecurity">Cybersecurity →</button>
-          <button class="pill-btn" data-target="data">Data Analyst →</button>
-          <button class="pill-btn" data-target="gamedev">Game Dev →</button>
-        </div>
-
-        <div class="about-divider"></div>
-        <div class="tag">Toolkit</div>
-        <div class="skills-group">
-          <div class="skill-label">Languages</div>
-          <div class="skill-pills">
-            <span>Python</span><span>Java</span><span>SQL</span><span>JavaScript</span><span>HTML/CSS</span><span>Bash</span><span>PowerShell</span><span>R</span>
+    <!-- PROJECTS -->
+    <div class="section" id="projects">
+      <div class="section-inner content-block">
+        <div class="proj-header">
+          <div>
+            <div class="eyebrow">02 — Projects</div>
+            <div class="section-title" style="margin-bottom:0">Projects</div>
+          </div>
+          <div class="proj-nav-btns">
+            <button class="proj-arr" onclick="projPage(-1)">&#8249;</button>
+            <span id="proj-counter" style="font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:1px">1 / 2</span>
+            <button class="proj-arr" onclick="projPage(1)">&#8250;</button>
           </div>
         </div>
-        <div class="skills-group">
-          <div class="skill-label">Data</div>
-          <div class="skill-pills">
-            <span>Pandas</span><span>NumPy</span><span>Scikit-learn</span><span>NetworkX</span><span>BeautifulSoup</span><span>Jupyter</span>
+        <div id="proj-grid"></div>
+      </div>
+    </div>
+
+    <!-- SKILLS -->
+    <div class="section" id="skills">
+      <div class="section-inner content-block">
+        <div class="eyebrow">03 — Skills</div>
+        <div class="section-title">Skills</div>
+        <div class="skill-list">
+          <div class="skill-group">
+            <div class="skill-heading">Languages</div>
+            <div class="skill-items">Python · SQL · Java · JavaScript · TypeScript · HTML/CSS · R · LaTeX</div>
+          </div>
+          <div class="skill-group">
+            <div class="skill-heading">Data</div>
+            <div class="skill-items">Pandas · NumPy · Data cleaning · Data validation · Error analysis</div>
+          </div>
+          <div class="skill-group">
+            <div class="skill-heading">Machine Learning</div>
+            <div class="skill-items">Scikit-learn · TF-IDF · NLP · Classification · Model comparison</div>
+          </div>
+          <div class="skill-group">
+            <div class="skill-heading">Visualization</div>
+            <div class="skill-items">Power BI · Excel · Matplotlib · Seaborn · Gephi</div>
+          </div>
+          <div class="skill-group">
+            <div class="skill-heading">Web / Tools</div>
+            <div class="skill-items">React · TypeScript · Supabase · Git · GitHub · VS Code</div>
+          </div>
+          <div class="skill-group">
+            <div class="skill-heading">Coursework</div>
+            <div class="skill-items">Database design · Data science · Data visualization · Statistics · Machine learning</div>
           </div>
         </div>
-        <div class="skills-group">
-          <div class="skill-label">Cybersecurity</div>
-          <div class="skill-pills">
-            <span>Splunk</span><span>Wireshark</span><span>Nmap</span><span>Kali Linux</span><span>Metasploit</span><span>Sysmon</span>
-          </div>
-        </div>
-        <div class="skills-group">
-          <div class="skill-label">Game Dev</div>
-          <div class="skill-pills">
-            <span>Unity</span><span>C#</span><span>Godot</span><span>GDScript</span>
-          </div>
-        </div>
-      </section>
+        <div class="divider"></div>
+        <div class="body-text" style="font-family:'Space Mono',monospace;font-size:10px;line-height:2.2">Fluent in Korean and English.</div>
+      </div>
+    </div>
 
-      <!-- CYBERSECURITY -->
-      <section class="section" id="cybersecurity" style="left: 3400px; top: 1000px;">
-        <div class="tag"></div>
-        <h2 class="section-title">Cybersecurity</h2>
-        <p class="section-body">Interested in threat analysis, network security, and protecting systems from the inside out. Here are some projects and my resume.</p>
-        <div class="card-grid">
-          <div class="project-card">
-            <div class="project-card-body">
-              <div class="card-label">Splunk · ELK · Wazuh</div>
-              <h3>Home Lab SIEM Setup</h3>
-              <p>Configured SIEM tools for centralized log collection and real-time analysis, with dashboards to detect brute-force attempts and port scans.</p>
-            </div>
-            <a href="#" class="card-link">View →</a>
-          </div>
-          <div class="project-card">
-            <div class="project-card-body">
-              <div class="card-label">Python · Networking</div>
-              <h3>Multithreaded TCP Port Scanner</h3>
-              <p>Multithreaded TCP scanner supporting CIDR targets and custom port ranges, with service detection, banner grabbing, and structured JSON output.</p>
-            </div>
-            <a href="#" class="card-link">View →</a>
-          </div>
-          <div class="project-card">
-            <div class="project-card-body">
-              <div class="card-label">Python · Scapy</div>
-              <h3>Network Packet Sniffer</h3>
-              <p>Packet capture tool that classifies live traffic across TCP, UDP, DNS, ICMP, and IP protocols with BPF filtering for targeted inspection.</p>
-            </div>
-            <a href="#" class="card-link">View →</a>
-          </div>
-          <div class="project-card">
-            <div class="project-card-body">
-              <div class="card-label">Python · SIEM Concepts</div>
-              <h3>Automated Log Threat Detection</h3>
-              <p>Log analysis tool that parses system and auth logs to detect brute-force attempts, failed logins, and privilege escalation indicators.</p>
-            </div>
-            <a href="#" class="card-link">View →</a>
-          </div>
-        </div>
+    <!-- CONTACT -->
+    <div class="section" id="contact">
+      <div class="section-inner content-block">
+        <div class="eyebrow">04 — Contact</div>
+        <div class="section-title">Contact</div>
+        <div class="clink"><span class="clink-type">Email</span><span class="clink-val"><a href="mailto:tj11564@gmail.com" aria-label="Email TJ Kim"><svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18c1.1 0 2 .9 2 2v10c0 1.1-.9 2-2 2H3c-1.1 0-2-.9-2-2V7c0-1.1.9-2 2-2zm9 8.1L3.8 7.6V17h16.4V7.6L12 13.1zm0-2.2L20.1 7H3.9L12 10.9z"/></svg>tj11564@gmail.com</a></span></div>
+        <div class="clink"><span class="clink-type">GitHub</span><span class="clink-val"><a href="https://github.com/TotallyJuicy" target="_blank" rel="noopener noreferrer" aria-label="Open TJ Kim GitHub"><svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56v-2.02c-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.27-1.68-1.27-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.67 1.24 3.32.95.1-.74.4-1.24.73-1.53-2.56-.29-5.25-1.28-5.25-5.69 0-1.26.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.16 1.18A10.9 10.9 0 0 1 12 6.17c.98 0 1.96.13 2.88.39 2.19-1.49 3.15-1.18 3.15-1.18.62 1.58.23 2.75.11 3.04.74.8 1.18 1.82 1.18 3.08 0 4.42-2.7 5.39-5.27 5.68.41.35.78 1.05.78 2.12v3.05c0 .31.21.67.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>github.com/TotallyJuicy</a></span></div>
+        <div class="clink"><span class="clink-type">LinkedIn</span><span class="clink-val"><a href="https://www.linkedin.com/in/taejeong-kim03" target="_blank" rel="noopener noreferrer" aria-label="Open TJ Kim LinkedIn"><svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5A2.5 2.5 0 1 1 0 3.5a2.5 2.5 0 0 1 4.98 0zM.42 8.24h4.12V23H.42V8.24zM8.12 8.24h3.95v2.02h.06c.55-1.04 1.9-2.14 3.91-2.14 4.18 0 4.95 2.75 4.95 6.33V23h-4.12v-7.57c0-1.8-.03-4.12-2.51-4.12-2.51 0-2.9 1.96-2.9 3.99V23H8.12V8.24z"/></svg>linkedin.com/in/taejeong-kim03</a></span></div>
+      </div>
+    </div>
 
-      </section>
+  </div>
+</div>
 
-      <!-- DATA -->
-      <section class="section" id="data" style="left: 400px; top: 900px;">
-        <div class="tag"></div>
-        <h2 class="section-title">Data Analysis</h2>
-        <p class="section-body">I like finding patterns in messy data and turning them into something that actually makes sense. Python, SQL, and a lot of curiosity.</p>
-        <div class="card-grid">
-          <div class="project-card">
-            <div class="project-card-body">
-              <div class="card-label">SQL · MySQL</div>
-              <h3>Letterboxd Heavy vs. Casual Rater Analysis</h3>
-              <p>Analyzed 10.4M movie ratings to compare behavioral differences between heavy and casual users — rating harshness, consensus deviation, and variance.</p>
-            </div>
-            <a href="https://github.com/TotallyJuicy/Letterboxd-EDA" target="_blank" class="card-link">View →</a>
-          </div>
-          <div class="project-card">
-            <div class="project-card-body">
-              <div class="card-label">Python · Pandas · EDA</div>
-              <h3>Teamfight Tactics Exploratory Data Analysis</h3>
-              <p>Exploratory analysis of TFT match data — investigating traits, unit performance, and placement patterns across ranked play.</p>
-            </div>
-            <a href="#" class="card-link">WIP</a>
-          </div>
-          <div class="project-card">
-            <div class="project-card-body">
-              <div class="card-label">Python · Pandas</div>
-              <h3>Pokémon Showdown Meta Analysis</h3>
-              <p>Parsed Smogon usage stats into Pandas DataFrames to rank top competitive Pokémon and identify meta-dominant trends. Published on Medium.</p>
-            </div>
-            <a href="https://github.com/TotallyJuicy/pokemonshowdown-analysis" target="_blank" class="card-link">View →</a>
-          </div>
-          <div class="project-card">
-            <div class="project-card-body">
-              <div class="card-label">Python · NetworkX · Gephi</div>
-              <h3>Wikipedia Knowledge Graph</h3>
-              <p>Crawled 1,400 Wikipedia pages via BFS to build a NetworkX graph of 2,400 edges, visualized in Gephi to reveal clusters across AI, politics, and academia.</p>
-            </div>
-            <a href="#" class="card-link">View →</a>
-          </div>
-          <div class="project-card">
-            <div class="project-card-body">
-              <div class="card-label">Python · Scikit-learn · NLP</div>
-              <h3>Steam Review Sentiment Classifier</h3>
-              <p>Binary sentiment classifier on 50K Steam reviews using TF-IDF and Naive Bayes/KNN/Decision Tree models — achieved ~86% accuracy and 0.89 AUC.</p>
-            </div>
-            <a href="#" class="card-link">View →</a>
-          </div>
-        </div>
+<!-- GAME LAYER -->
+<div id="game-layer"></div>
 
-      </section>
+<!-- PLAYER -->
+<div id="player">
+  <div id="player-shadow"></div>
+  <div id="player-head"></div>
+  <div id="player-body"></div>
+  <div id="player-legs"></div>
+</div>
 
-      <!-- GAME DEV -->
-      <section class="section" id="gamedev" style="left: 3300px; top: 200px;">
-        <div class="tag"></div>
-        <h2 class="section-title">Game Dev</h2>
-        <p class="section-body">Just getting started, but deeply interested in building worlds and experiences. Exploring game design, mechanics, and storytelling through play.</p>
-        <div class="card-grid">
-          <div class="project-card">
-            <div class="project-card-body">
-              <div class="card-label">WIP · Unity · C#</div>
-              <h3>Colorblind</h3>
-              <p>An aesthetic narrative game built in Unity, inspired by Undertale. Currently in development.</p>
-            </div>
-            <a href="#" class="card-link">WIP</a>
-          </div>
-          <div class="project-card">
-            <div class="project-card-body">
-              <div class="card-label">Unity · C#</div>
-              <h3>Color Timing Game</h3>
-              <p>A color-based timing pixel game built in Unity.</p>
-            </div>
-            <a href="#" class="card-link">WIP</a>
-          </div>
-          <div class="project-card">
-            <div class="project-card-body">
-              <div class="card-label">Unity · C#</div>
-              <h3>Cool Pool</h3>
-              <p>A pool game built in Unity with a friend.</p>
-            </div>
-            <a href="https://github.com/guanglinwei/coolpool" target="_blank" class="card-link">View →</a>
-          </div>
-          <div class="project-card coming-soon">
-            <div class="project-card-body">
-              <div class="card-label">Coming soon</div>
-              <h3>More on the way</h3>
-              <p>This section is growing. Check back soon.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- CONTACT -->
-      <section class="section contact-section" id="contact" style="left: 300px; top: 2200px;">
-        <div class="tag">Say hi</div>
-        <h2 class="section-title">Let's Connect</h2>
-        <p class="section-body">Whether it's a job, a collab, or just a cool project — I'm always down to talk.</p>
-        <div class="contact-links">
-          <a href="mailto:tj11564@gmail.com" class="contact-item">
-            <span class="contact-icon">✉</span>
-            <span>tj11564@gmail.com</span>
-          </a>
-          <a href="https://linkedin.com/in/taejeong-kim03" target="_blank" class="contact-item">
-            <span class="contact-icon"><i class="fa-brands fa-linkedin"></i></span>
-            <span>LinkedIn</span>
-          </a>
-          <a href="https://github.com/TotallyJuicy" target="_blank" class="contact-item">
-            <span class="contact-icon"><i class="fa-brands fa-github"></i></span>
-            <span>GitHub — TotallyJuicy</span>
-          </a>
-        </div>
-      </section>
-
-      <!-- RESUME -->
-      <section class="section resume-section" id="resume" style="left: 1900px; top: 2300px;">
-        <div class="tag">Resume</div>
-        <h2 class="section-title">Resumes</h2>
-        <p class="section-body">Two tracks, two resumes. Download whichever fits the role — or both.</p>
-        <div class="resume-cards">
-
-          <div class="resume-card">
-            <div class="resume-preview">
-              <iframe src="Cyber_Resume.pdf" title="Cybersecurity Resume"></iframe>
-              <div class="resume-preview-fallback">
-                <span>&#128196;</span>
-                <p>Cybersecurity Resume</p>
-                <small>Upload your PDF to see a preview</small>
-              </div>
-            </div>
-            <div class="resume-card-footer">
-              <span class="card-label">Cybersecurity</span>
-              <a href="Cyber_Resume.pdf" download class="resume-btn">Download &#8595;</a>
-            </div>
-          </div>
-
-          <div class="resume-card">
-            <div class="resume-preview">
-              <iframe src="DataAnalyst.pdf" title="Data Resume"></iframe>
-              <div class="resume-preview-fallback">
-                <span>&#128196;</span>
-                <p>Data Analysis Resume</p>
-                <small>Upload your PDF to see a preview</small>
-              </div>
-            </div>
-            <div class="resume-card-footer">
-              <span class="card-label">Data Analysis</span>
-              <a href="DataAnalyst.pdf" download class="resume-btn">Download &#8595;</a>
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      <!-- OTHER -->
-      <section class="section" id="other" style="left: 500px; top: 3100px;">
-        <div class="tag">Other</div>
-        <h2 class="section-title">Other Projects</h2>
-        <p class="section-body">Things that don't fit neatly into one category — websites, tools, experiments, and collabs.</p>
-        <div class="card-grid">
-          <div class="project-card">
-            <div class="project-card-body">
-              <div class="card-label">Web · Decision Tree</div>
-              <h3>OddlySpecificAskCrush</h3>
-              <p>An interactive decision tree that helps you figure out whether to tell your crush you like them. Built with vanilla HTML, CSS, and JS.</p>
-            </div>
-            <a href="https://oddlyspecific-askout.netlify.app" target="_blank" class="card-link">View →</a>
-          </div>
-          <div class="project-card coming-soon">
-            <div class="project-card-body">
-              <div class="card-label">Coming soon</div>
-              <h3>More on the way</h3>
-              <p>This section is growing. Check back soon.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- EASTER EGG -->
-      <section class="section" id="easteregg" style="left: 1800px; top: 3600px;">
-        <div class="tag"></div>
-        <h2 class="section-title">You Found Me</h2>
-        <p class="hero-body">Hi! My name is TJ Kim — thanks for poking around my site. Outside of my professional life, there's just me. I love playing guitar, gaming, and rating movies. I always have creative ideas that haven't quite launched yet, so if you have a project idea or just want to hang, let me know!</p>
-      </section>
-      <svg class="deco-lines" viewBox="0 0 5000 5000" xmlns="http://www.w3.org/2000/svg">
-        <!-- about -> cybersecurity (right) -->
-        <path d="M 2480 1440 C 2800 1350 3100 1250 3400 1240" stroke="#BABE75" stroke-width="1.5" fill="none" opacity="0.35" stroke-dasharray="6 4"/>
-        <!-- about -> data (left) -->
-        <path d="M 2000 1350 C 1600 1250 1200 1100 880 1100" stroke="#BABE75" stroke-width="1.5" fill="none" opacity="0.35" stroke-dasharray="6 4"/>
-        <!-- about -> gamedev (top right) -->
-        <path d="M 2350 1100 C 2700 800 3000 500 3300 480" stroke="#BEC5A4" stroke-width="1.5" fill="none" opacity="0.3" stroke-dasharray="6 4"/>
-        <!-- about -> resume (below) -->
-        <path d="M 2240 1780 C 2200 1950 2100 2100 2250 2300" stroke="#BEC5A4" stroke-width="1.5" fill="none" opacity="0.3" stroke-dasharray="6 4"/>
-        <!-- about -> contact (bottom left) -->
-        <path d="M 2000 1780 C 1600 1900 1100 2050 720 2300" stroke="#BABE75" stroke-width="1.5" fill="none" opacity="0.25" stroke-dasharray="6 4"/>
-        <!-- contact -> other (below) -->
-        <path d="M 500 2560 C 500 2700 500 2900 500 3100" stroke="#BEC5A4" stroke-width="1.5" fill="none" opacity="0.25" stroke-dasharray="6 4"/>
-        <!-- about -> easteregg (below) -->
-        <path d="M 2240 1800 C 2240 2400 1900 3000 2050 3600" stroke="#BABE75" stroke-width="1.5" fill="none" opacity="0.35" stroke-dasharray="6 4"/>
-      </svg>
-
+<!-- HUD -->
+<div id="hud">
+  <div id="scoreboard">KILLS&nbsp;&nbsp;<span id="kill-count">0</span></div>
+  <div id="mode-toggle" onclick="toggleCombat()">
+    <div id="mode-label">Combat</div>
+    <div id="toggle-track">
+      <div id="toggle-thumb"></div>
     </div>
   </div>
-
-  <!-- BOTTOM HUD -->
-  <div class="bottom-hud">
-    <span class="hud-hint">Click a section above to navigate · Move to an edge to explore</span>
+  <div id="ctrl-box">
+    <div class="kg">
+      <div class="k ke"></div><div class="k" id="k-w">W</div><div class="k ke"></div>
+      <div class="k" id="k-a">A</div><div class="k" id="k-s">S</div><div class="k" id="k-d">D</div>
+    </div>
+    <div id="ch">move character</div>
   </div>
+</div>
 
-  <script src="script.js?v=2"></script>
+<script>
+// ── PROJECTS DATA ──────────────────────────────────────────────
+// To add a project: add an object to this array with name, desc, tags (array), and link (url string or '').
+const PROJECTS = [
+  {name:'Spotify Listening Analytics Dashboard', desc:'Processed 8+ years of Spotify streaming history, removed passive listening, and built dashboard-ready datasets for Power BI.', tags:['Python','Pandas','Power BI'], link:''},
+  {name:'Letterboxd Rater Analysis', desc:'Analyzed 10.4M movie ratings with SQL to compare heavy and casual users, consensus ratings, and score variance.', tags:['SQL','MySQL','Analysis'], link:''},
+  {name:'Steam Review Sentiment Classification', desc:'Built a sentiment classifier on 50,000 Steam reviews using TF-IDF and compared Naive Bayes, KNN, and Decision Tree models.', tags:['Python','Scikit-learn','NLP'], link:''},
+  {name:'Pokémon Showdown Meta Analysis', desc:'Parsed Smogon usage data into Pandas DataFrames and identified meta-dominant competitive trends.', tags:['Python','Pandas','Data Viz'], link:''},
+  {name:'Wikipedia Knowledge Graph', desc:'Built a linked-topic graph from Wikipedia pages with NetworkX and visualized centrality and clustering structure.', tags:['Python','NetworkX','Gephi'], link:''},
+  {name:'CocktailMixer', desc:'Built a recipe web app with stored drinks, saved recipes, and a clean React interface.', tags:['React','TypeScript','Supabase'], link:''},
+];
+
+const PER_PAGE = 4;
+let projPage_ = 0;
+
+function renderProjects() {
+  const grid = document.getElementById('proj-grid');
+  const counter = document.getElementById('proj-counter');
+  const pages = Math.ceil(PROJECTS.length / PER_PAGE);
+  counter.textContent = (projPage_+1) + ' / ' + pages;
+  const slice = PROJECTS.slice(projPage_*PER_PAGE, projPage_*PER_PAGE+PER_PAGE);
+  grid.innerHTML = slice.map(p => `
+    <div class="proj-card">
+      <div class="proj-card-name">${p.name}</div>
+      <div class="proj-card-desc">${p.desc}</div>
+      <div class="proj-card-footer">
+        <div class="proj-card-tags">${p.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+        ${p.link ? `<a class="proj-link" href="${p.link}" target="_blank">View ↗</a>` : ''}
+      </div>
+    </div>`).join('');
+}
+function projPage(dir) {
+  const pages = Math.ceil(PROJECTS.length / PER_PAGE);
+  projPage_ = (projPage_+dir+pages) % pages;
+  renderProjects();
+}
+renderProjects();
+
+// ── PHOTO UPLOAD ────────────────────────────────────────────────
+document.getElementById('photo-input').addEventListener('change', e => {
+  const f = e.target.files[0]; if(!f) return;
+  const img = document.getElementById('photo-img');
+  img.src = URL.createObjectURL(f);
+  img.style.display = 'block';
+  document.getElementById('photo-hint').style.display = 'none';
+});
+
+// ── SCROLL & NAV ────────────────────────────────────────────────
+const map = document.getElementById('map');
+const NAVH = () => document.getElementById('nav').offsetHeight;
+const WH = () => window.innerHeight - NAVH();
+const WW = () => window.innerWidth;
+const SECTION_IDS = ['about','projects','skills','contact'];
+let scrollY = 0;
+
+function applyScroll() {
+  const max = map.scrollHeight - WH();
+  scrollY = Math.max(0, Math.min(max, scrollY));
+  map.style.transform = `translateY(${-scrollY}px)`;
+  updateNav();
+}
+function updateNav() {
+  let cur = 'top';
+  SECTION_IDS.forEach(id => {
+    const el = document.getElementById(id);
+    if (el && el.offsetTop - scrollY < WH()/2) cur = id;
+  });
+  document.querySelectorAll('.nav-btn').forEach(b => {
+    b.classList.toggle('active', b.textContent.trim().toLowerCase() === cur);
+  });
+}
+function navTo(id, e) {
+  const el = document.getElementById(id); if(!el) return;
+  const target = el.offsetTop, start = scrollY, dist = target - start;
+  const dur = 450; let t0 = null;
+  (function step(t){ if(!t0)t0=t; const p=Math.min(1,(t-t0)/dur); const ease=p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2; scrollY=start+dist*ease; applyScroll(); if(p<1)requestAnimationFrame(step); })(performance.now());
+  if(e && e.target){ document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active')); e.target.classList.add('active'); }
+}
+window.addEventListener('wheel', e=>{ scrollY+=e.deltaY; applyScroll(); },{passive:true});
+
+// ── PLAYER ──────────────────────────────────────────────────────
+const playerEl = document.getElementById('player');
+let px = WW()/2, py = WH()/2;
+let keys = {};
+const SPD = 4;
+const PSIZE = 9; // collision radius
+
+playerEl.style.left = px+'px';
+playerEl.style.top  = (py+NAVH())+'px';
+
+window.addEventListener('resize', () => {
+  px = Math.max(PSIZE, Math.min(WW()-PSIZE, px));
+  py = Math.max(PSIZE, Math.min(WH()-PSIZE, py));
+  playerEl.style.left = px+'px';
+  playerEl.style.top = (py+NAVH())+'px';
+  applyScroll();
+});
+
+// ── OBSTACLE RECTS ──────────────────────────────────────────────
+// Returns array of {x,y,w,h} in viewport coords for all content blocks + HUD
+function getObstacles() {
+  const obs = [];
+  // content sections on map
+  document.querySelectorAll('.section').forEach(el => {
+    const rect = el.getBoundingClientRect();
+    obs.push({x:rect.left,y:rect.top,w:rect.width,h:rect.height, solid:false});
+  });
+  // HUD panels are fixed — always same position
+  document.getElementById('hud').querySelectorAll('#scoreboard,#mode-toggle,#ctrl-box').forEach(el=>{
+    const r=el.getBoundingClientRect();
+    obs.push({x:r.left,y:r.top,w:r.width,h:r.height,solid:true});
+  });
+  return obs;
+}
+
+function circleRect(cx,cy,cr,rx,ry,rw,rh){
+  const nx=Math.max(rx,Math.min(rx+rw,cx));
+  const ny=Math.max(ry,Math.min(ry+rh,cy));
+  return Math.hypot(cx-nx,cy-ny)<cr;
+}
+
+// ── COMBAT STATE ────────────────────────────────────────────────
+let combatOn = false;
+let kills = 0;
+const MOB_START_SPEED = 1.2;
+const MOB_SPEED_INCREMENT = 0.1;
+const MOB_MAX_SPEED = 2.5;
+let mobSpeed = MOB_START_SPEED;
+let mobs = [];     // {el, x, y, hp}
+let bullets = [];  // {el, x, y, vx, vy}
+let mobsToSpawn = 1;
+const gameLayer = document.getElementById('game-layer');
+
+function clearCombatEntities() {
+  mobs.forEach(m => m.el.remove());
+  bullets.forEach(b => b.el.remove());
+  mobs = [];
+  bullets = [];
+  gameLayer.innerHTML = '';
+}
+
+function resetCombatState() {
+  clearCombatEntities();
+  kills = 0;
+  mobSpeed = MOB_START_SPEED;
+  mobsToSpawn = 1;
+  document.getElementById('kill-count').textContent = kills;
+}
+
+function setCombatMode(on) {
+  combatOn = on;
+  document.getElementById('toggle-track').classList.toggle('on', combatOn);
+  document.body.classList.toggle('combat', combatOn);
+}
+
+function startCombat() {
+  resetCombatState();
+  setCombatMode(true);
+  spawnWave(mobsToSpawn);
+}
+
+function stopCombat() {
+  setCombatMode(false);
+  clearCombatEntities();
+}
+
+function toggleCombat() {
+  if (combatOn) stopCombat();
+  else startCombat();
+}
+
+function spawnWave(n) {
+  for(let i=0;i<n;i++) spawnMob();
+}
+
+function spawnMob() {
+  const el = document.createElement('div');
+  el.className = 'mob';
+  // spawn at random screen edge
+  let x,y;
+  const side = Math.floor(Math.random()*4);
+  if(side===0){x=Math.random()*WW();y=0;}
+  else if(side===1){x=WW();y=Math.random()*WH();}
+  else if(side===2){x=Math.random()*WW();y=WH();}
+  else{x=0;y=Math.random()*WH();}
+  el.style.left=x+'px'; el.style.top=y+'px';
+  gameLayer.appendChild(el);
+  mobs.push({el,x,y});
+}
+
+// shoot on click
+document.addEventListener('click', e => {
+  if(!combatOn) return;
+  if(e.target.closest('#hud')||e.target.closest('#nav')) return;
+  // all coords in viewport space (0,0 = top-left of full window)
+  const tx = e.clientX, ty = e.clientY;
+  const bx = px, by = py + NAVH(); // player is in game-layer; convert to viewport
+  const dist = Math.hypot(tx-bx, ty-by);
+  if(dist<1) return;
+  const vx = (tx-bx)/dist*5, vy = (ty-by)/dist*5;
+  const el = document.createElement('div');
+  el.style.cssText='position:fixed;width:7px;height:7px;background:#2a3e28;border-radius:50%;pointer-events:none;z-index:250;left:'+bx+'px;top:'+by+'px';
+  document.body.appendChild(el);
+  bullets.push({el,x:bx,y:by,vx,vy});
+});
+
+function updateGame() {
+  if(!combatOn) return;
+
+  // move bullets — viewport coords, position:fixed
+  bullets = bullets.filter(b => {
+    b.x+=b.vx; b.y+=b.vy;
+    b.el.style.left=b.x+'px'; b.el.style.top=b.y+'px';
+    // remove if off screen
+    if(b.x<0||b.x>WW()||b.y<0||b.y>window.innerHeight){ b.el.remove(); return false; }
+    // hit mob — mob x,y in game-layer coords, add nav height to get viewport
+    for(let i=mobs.length-1;i>=0;i--){
+      const m=mobs[i];
+      if(Math.hypot(b.x-m.x, b.y-(m.y+NAVH()))<14){
+        m.el.remove(); mobs.splice(i,1);
+        b.el.remove();
+        kills++;
+        document.getElementById('kill-count').textContent=kills;
+        mobSpeed=Math.min(MOB_MAX_SPEED, Math.round((mobSpeed+MOB_SPEED_INCREMENT)*10)/10);
+        mobsToSpawn++;
+        setTimeout(()=>{ if(combatOn && mobs.length<5) spawnWave(Math.min(mobsToSpawn, 5-mobs.length)); },800);
+        return false;
+      }
+    }
+    return true;
+  });
+
+  // move mobs toward player
+  for (const m of mobs) {
+    const dx=px-m.x, dy=py-m.y, dist=Math.hypot(dx,dy);
+    if(dist<1) continue;
+    m.x+=dx/dist*mobSpeed;
+    m.y+=dy/dist*mobSpeed;
+    m.el.style.left=m.x+'px'; m.el.style.top=m.y+'px';
+    // enemy touches player → end combat and clear the screen
+    if(Math.hypot(m.x-px,m.y-py)<14){
+      stopCombat();
+      return;
+    }
+  }
+}
+
+// ── MAIN LOOP ───────────────────────────────────────────────────
+function loop() {
+  let dx=0,dy=0;
+  if(keys['w']||keys['arrowup'])   dy-=SPD;
+  if(keys['s']||keys['arrowdown']) dy+=SPD;
+  if(keys['a']||keys['arrowleft']) dx-=SPD;
+  if(keys['d']||keys['arrowright'])dx+=SPD;
+  if(dx&&dy){dx*=.707;dy*=.707;}
+
+  if(dx||dy){
+    const margin=80;
+    const npx=Math.max(PSIZE,Math.min(WW()-PSIZE,px+dx));
+    let npy=py+dy;
+    // scroll when near edge
+    if(npy<margin){scrollY+=npy-margin;npy=margin;}
+    else if(npy>WH()-margin){scrollY+=npy-(WH()-margin);npy=WH()-margin;}
+    npy=Math.max(PSIZE,Math.min(WH()-PSIZE,npy));
+
+    px=npx;py=npy;
+    applyScroll();
+    playerEl.style.left=px+'px';
+    playerEl.style.top=(py+NAVH())+'px';
+  }
+
+  updateGame();
+  requestAnimationFrame(loop);
+}
+
+document.addEventListener('keydown',e=>{
+  const k=e.key.toLowerCase(); keys[k]=true;
+  const km={w:'k-w',a:'k-a',s:'k-s',d:'k-d'};
+  if(km[k]) document.getElementById(km[k])?.classList.add('pressed');
+  if(['arrowup','arrowdown',' '].includes(k)) e.preventDefault();
+});
+document.addEventListener('keyup',e=>{
+  const k=e.key.toLowerCase(); keys[k]=false;
+  const km={w:'k-w',a:'k-a',s:'k-s',d:'k-d'};
+  if(km[k]) document.getElementById(km[k])?.classList.remove('pressed');
+});
+
+loop();
+</script>
 </body>
 </html>
