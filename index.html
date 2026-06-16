@@ -53,6 +53,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);font-famil
 /* PROJECTS */
 #projects .section-inner{max-width:100%;padding:60px 5vw}
 .proj-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:32px}
+.proj-subtitle{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-top:8px}
 .proj-nav-btns{display:flex;align-items:center;gap:10px}
 .proj-arr{width:36px;height:36px;background:var(--bg);border:1px solid var(--surface);border-radius:3px;cursor:pointer;font-size:18px;color:var(--mid);display:flex;align-items:center;justify-content:center;transition:all .15s}
 .proj-arr:hover{background:var(--surface);color:var(--dark)}
@@ -112,6 +113,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);font-famil
 .photo-box img{object-position:center 58%}
 #projects .section-inner{max-width:min(1500px,94vw);padding:var(--content-pad-y) var(--content-pad-x)}
 .proj-header{margin-bottom:clamp(22px,4vh,40px);gap:var(--gap-md)}
+.proj-subtitle{font-size:clamp(9px,.85vw,11px);margin-top:clamp(7px,1vh,10px)}
 .proj-nav-btns{gap:clamp(8px,1.2vw,14px)}
 .proj-arr{width:clamp(36px,3.5vw,52px);height:clamp(36px,3.5vw,52px);font-size:clamp(18px,1.8vw,26px)}
 #proj-counter{font-size:clamp(8px,.9vw,11px)!important}
@@ -206,6 +208,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);font-famil
           <div>
             <div class="eyebrow">02 — Projects</div>
             <div class="section-title" style="margin-bottom:0">Projects</div>
+            <div class="proj-subtitle">Click to learn more</div>
           </div>
           <div class="proj-nav-btns">
             <button class="proj-arr" onclick="projPage(-1)">&#8249;</button>
